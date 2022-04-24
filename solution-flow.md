@@ -2200,13 +2200,314 @@ int main()
 
 ## [SDOI2006] 仓库管理员的烦恼
 
+我们想要找到的是一种方案，使得每一种货物能够以最小的代价各自被分到一个单独的仓库里面。
+但是题目并不需要我们输出具体的方案，只需要我们输出最小代价。
 
+因为本仓库的物品再运回到本仓库是不会产生代价的，所以我们每一个仓库运送货物的代价都可以表示为运进该仓库的商品的代价之和，这等于所有该类商品的数量之和减去当前仓库内的该种商品总数。
 
-## [HAOI2010] 订货
+于是我们建立 $2n$ 个点，一半代表仓库，一半代表货物种类。
+每一个仓库都向所有的货物种类连一条容量为1，费用为所有该类商品的数量之和减去当前仓库内的该种商品总数。
 
-## [SDOI2009] 晨跑
+然后跑费用流即可。
 
 {% note success 示例代码 %}
 ``` cpp
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 5010, M = 100010, INF = 1e8;
+int n, m, S, T;
+int h[N], e[M], f[M], w[M], ne[M], idx;
+int q[N], d[N], pre[N], incf[N];
+bool st[N];
+int nums[160][160], sum[160];
+
+void add(int a, int b, int c, int d)
+{
+	e[idx] = b, f[idx] = c, w[idx] = d, ne[idx] = h[a], h[a] = idx++;
+	e[idx] = a, f[idx] = 0, w[idx] = -d, ne[idx] = h[b], h[b] = idx++;
+}
+
+bool spfa()
+{
+	int hh = 0, tt = 1;
+	memset(d, 0x3f, sizeof d);
+	memset(incf, 0, sizeof incf);
+	q[0] = S, d[S] = 0, incf[S] = INF;
+	while(hh != tt)
+	{
+		int t = q[hh++];
+		if(hh == N) hh = 0;
+		st[t] = false;
+
+		for(int i = h[t]; ~i; i = ne[i])
+		{
+			int ver = e[i];
+			if(f[i] && d[ver] > d[t] + w[i])
+			{
+				d[ver] = d[t] + w[i];
+				pre[ver] = i;
+				incf[ver] = min(f[i], incf[t]);
+				if(!st[ver])
+				{
+					q[tt++] = ver;
+					if(tt == N) tt = 0;
+					st[ver] = true;
+				}
+			}
+		}
+	}
+
+	return incf[T] > 0;
+}
+
+void EK(int &flow, int &cost)
+{
+	flow = cost = 0;
+	while(spfa())
+	{
+		int t = incf[T];
+		flow += t, cost += t * d[T];
+		for(int i = T; i != S; i = e[pre[i] ^ 1])
+		{
+			f[pre[i]] -= t;
+			f[pre[i] ^ 1] += t;
+		}
+	}
+}
+
+int main()
+{
+	scanf("%d%", &n);
+	memset(h, -1, sizeof h);
+	for(int i = 1; i <= n; i++)
+	{
+		for(int j = 1; j <= n; j++)
+		{
+			scanf("%d", &nums[i][j]);
+			sum[i] += nums[i][j];
+		}
+	}
+	S = 0, T = 2 * n + 1;
+	for(int i = 1; i <= n; i++)
+	{
+		add(S, i, 1, 0);
+		add(i + n, T, 1, 0);
+		for(int j = 1; j <= n; j++)
+			add(i, j + n, 1, sum[i] - nums[i][j]);
+	}
+	int flow, cost;
+	EK(flow, cost);
+	printf("%d\n", cost);
+	return 0;
+}
 ```
 {% endnote %}
+
+## [HAOI2010] 订货
+
+我们考虑以每月仓库的状态来建立节点。
+
+每个节点都从源点连一条边，容量为无限，费用为 $d_i$，代表进货；
+同时每个节点都向汇点连一条边，容量为 $U_i$，费用为0，代表供应市场；
+每个不是最后一个节点的节点都向其下一个节点连一条边，容量为 $S$，代价为 $m$，代表存贮。
+
+最后跑最小费用最大流即可。
+
+{% note success 示例代码 %}
+``` cpp
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 5010, M = 100010, INF = 1e8;
+int n, m, S, T;
+int h[N], e[M], f[M], w[M], ne[M], idx;
+int q[N], d[N], pre[N], incf[N];
+bool st[N];
+int u[N], p[N];
+
+void add(int a, int b, int c, int d)
+{
+	e[idx] = b, f[idx] = c, w[idx] = d, ne[idx] = h[a], h[a] = idx++;
+	e[idx] = a, f[idx] = 0, w[idx] = -d, ne[idx] = h[b], h[b] = idx++;
+}
+
+bool spfa()
+{
+	int hh = 0, tt = 1;
+	memset(d, 0x3f, sizeof d);
+	memset(incf, 0, sizeof incf);
+	q[0] = S, d[S] = 0, incf[S] = INF;
+	while(hh != tt)
+	{
+		int t = q[hh++];
+		if(hh == N) hh = 0;
+		st[t] = false;
+
+		for(int i = h[t]; ~i; i = ne[i])
+		{
+			int ver = e[i];
+			if(f[i] && d[ver] > d[t] + w[i])
+			{
+				d[ver] = d[t] + w[i];
+				pre[ver] = i;
+				incf[ver] = min(f[i], incf[t]);
+				if(!st[ver])
+				{
+					q[tt++] = ver;
+					if(tt == N) tt = 0;
+					st[ver] = true;
+				}
+			}
+		}
+	}
+
+	return incf[T] > 0;
+}
+
+void EK(int &flow, int &cost)
+{
+	flow = cost = 0;
+	while(spfa())
+	{
+		int t = incf[T];
+		flow += t, cost += t * d[T];
+		for(int i = T; i != S; i = e[pre[i] ^ 1])
+		{
+			f[pre[i]] -= t;
+			f[pre[i] ^ 1] += t;
+		}
+	}
+}
+
+int main()
+{
+	int s;
+	scanf("%d%d%d", &n, &m, &s);
+	memset(h, -1, sizeof h);
+	for(int i = 1; i <= n; i++)
+		scanf("%d", &u[i]);
+	for(int i = 1; i <= n; i++)
+		scanf("%d", &d[i]);
+	S = 0, T = n + 1;
+	for(int i = 1; i <= n; i++)
+	{
+		add(S, i, INF, d[i]);
+		add(i, T, u[i], 0);
+		if(i != n)
+			add(i, i + 1, s, m);
+	}
+	int flow, cost;
+	EK(flow, cost);
+	printf("%d\n", cost);
+	return 0;
+}
+```
+{% endnote %}
+
+## [SDOI2009] 晨跑
+
+将十字路口抽象为节点，将街道抽象为边。
+这道题就不需要我们另建源汇点了，题目中已经给出了源汇点。
+
+一个周期就相当于是从源点到汇点的一个流，路程就相当于是其代价。
+
+于是就建边，跑最小费用最大流。
+
+{% note success 示例代码 %}
+``` cpp
+#include <bits/stdc++.h>
+using namespace std;
+#define int long long
+const int maxn = 810;
+const int INF = 1e18;
+int S, T;
+struct node
+{
+	int y, z, w, nex;
+} e[20010 * 4];
+int head[maxn * 2], tot = 1, hd[maxn * 2];
+int n, m;
+void add(int x, int y, int z, int w)
+{
+	e[++tot] = { y, z, w, head[x] };
+	head[x] = tot;
+}
+int ans, cost;
+int d[maxn], vis[maxn];
+bool spfa()
+{
+	queue<int> q;
+	memset(d, 0x3f, sizeof(d));
+	memset(vis, 0, sizeof(vis));
+	d[S] = 0;
+	q.push(S);
+	while(!q.empty())
+	{
+		int x = q.front();
+		q.pop();
+		vis[x] = 0;
+		for(int i = head[x]; i; i = e[i].nex)
+		{
+			int v = e[i].y;
+			if(e[i].z && d[v] > d[x] + e[i].w)
+			{
+				d[v] = d[x] + e[i].w;
+				if(!vis[v])
+					vis[v] = 1, q.push(v);
+			}
+		}
+	}
+	return d[T] != 0x3f3f3f3f3f3f3f3f;
+}
+int dfs(int x, int in)
+{
+	if(x == T || !in)
+		return in;
+	int out = 0;
+	vis[x] = 1;
+	for(int &i = hd[x]; i && in; i = e[i].nex)
+	{
+		int v = e[i].y;
+		if(!e[i].z || d[v] != d[x] + e[i].w || vis[v])
+			continue;
+		int res = dfs(v, min(in, e[i].z));
+		e[i].z -= res;
+		e[i ^ 1].z += res;
+		out += res;
+		in -= res;
+	}
+	return out;
+}
+void dinic()
+{
+	while(spfa())
+	{
+		memcpy(hd, head, sizeof(head));
+		int k = dfs(S, INF);
+		ans += k;
+		cost += k * d[T];
+	}
+}
+signed main()
+{
+	cin >> n >> m;
+	while(m--)
+	{
+		int x, y, z;
+		scanf("%lld%lld%lld", &x, &y, &z);
+		add(x + n, y, 1, z);
+		add(y, x + n, 0, -z);
+	}
+	for(int i = 1; i <= n; i++)
+		add(i, i + n, 1, 0), add(i + n, i, 0, 0);
+	S = 1 + n, T = n;
+	dinic();
+	printf("%lld %lld", ans, cost);
+	return 0;
+}
+```
+{% endnote %}
+
+<!-- {% note success 示例代码 %}
+``` cpp
+```
+{% endnote %} -->

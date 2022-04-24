@@ -4,9 +4,8 @@ zh-CN: true
 date: 2021-12-27
 tags:
 	- 算法
-	- 树链剖分
 categories:
-	算法
+	- 算法
 mathjax: true
 ---
 

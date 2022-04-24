@@ -3,7 +3,7 @@ title: '#549. 农夫奶牛的约翰们 题解'
 date: 2022-04-12
 tags:
 	- 题解
-	- 树剖
+	- 树链剖分
 categories:
 	题解
 mathjax: true

@@ -5,7 +5,7 @@ tags:
 	- 算法
 	- 字符串
 categories:
-	算法
+	- 算法
 mathjax: true
 ---
 

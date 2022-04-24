@@ -5,9 +5,8 @@ date: 2022-02-28
 tags:
 	- 算法
 	- 图论
-	- 网络流
 categories:
-	图论
+	- 图论
 mathjax: true
 ---
 

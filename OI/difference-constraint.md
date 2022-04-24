@@ -4,7 +4,7 @@ date: 2022-03-30
 tags:
 	- 算法
 categories:
-	算法
+	- 算法
 mathjax: true
 ---
 
