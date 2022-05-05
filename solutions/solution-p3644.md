@@ -3,6 +3,7 @@ title: P3644 [APIO2015] 八邻旁之桥 题解
 date: 2022-04-20
 tags:
 	- 题解
+	- 贪心
 categories:
 	题解
 mathjax: true
