@@ -1,5 +1,5 @@
 ---
-title: P3644 [APIO2015] 八邻旁之桥 题解
+title: P3644 [APIO2015] 巴邻旁之桥 题解
 date: 2022-04-20
 tags:
 	- 题解
@@ -177,7 +177,6 @@ printf("%lld\n", ans + res);
 
 {% note success 示例代码 %}
 ``` cpp
-#define _CRT_SECURE_NO_WARNINGS
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long

@@ -401,7 +401,7 @@ struct Matrix
 
 我们知道 $F_n = F_{n-1} + F_{n-2}$，我们就考虑把斐波那契数列的相邻两项放在一个行（或者列，根据个人习惯）矩阵里面，就像这个样子：$\begin{bmatrix}F_i&F_{i-1}\end{bmatrix}$。
 
-我们需要把 $\begin{bmatrix}F_i&F_{i-1}\end{bmatrix}$ 变成 $\begin{bmatrix}F_{i-1}+f_i&F_i\end{bmatrix}$，同时需要用到矩阵乘法。
+我们需要把 $\begin{bmatrix}F_i&F_{i-1}\end{bmatrix}$ 变成 $\begin{bmatrix}F_{i-1}+F_i&F_i\end{bmatrix}$，同时需要用到矩阵乘法。
 
 因为
 $$

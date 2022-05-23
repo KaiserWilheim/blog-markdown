@@ -6,7 +6,7 @@ tags:
 	- 字符串
 	- 自动机
 categories:
-	数据结构
+	字符串
 mathjax: true
 ---
 

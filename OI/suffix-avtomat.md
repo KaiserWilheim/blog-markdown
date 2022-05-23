@@ -1,13 +1,12 @@
 ---
 title: 后缀自动机
-zh-CN: true
 date: 2022-01-21
 tags:
 	- 数据结构
 	- 自动机
 	- 字符串
 categories:
-	数据结构
+	字符串
 mathjax: true
 ---
 

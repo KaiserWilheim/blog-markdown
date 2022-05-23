@@ -1,12 +1,11 @@
 ---
 title: 后缀数组
-zh-CN: true
 date: 2022-01-28
 tags: 
 	- 数据结构
   - 字符串
 categories:
-	数据结构
+	字符串
 mathjax: true
 ---
 

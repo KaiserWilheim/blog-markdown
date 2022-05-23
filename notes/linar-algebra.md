@@ -5,7 +5,7 @@ date: 2021-10-01
 tags:
 - 数学
 categories:
- 数学
+    - 学习笔记
 mathjax: true
 ---
 

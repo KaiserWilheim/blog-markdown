@@ -39,6 +39,7 @@ mathjax: true
   Luogu P1402 酒店之王 ^
   Luogu P1231 教辅的组成 ^
 - Luogu P3701 主主树 [>](/solution-flow/#主主树)
+- LibreOJ #2239 / Luogu P3163 [CQOI2014]危桥 [>](/solution-flow/#CQOI2014-危桥)
 
 ## 二分图
 
@@ -68,11 +69,9 @@ mathjax: true
 
 最后枚举所有边，如果当前边连接一个外籍飞行员和一个英国飞行员，且其容量为空，那么这条边就被流经过，说明这条边代表的一堆飞行员可以配对，输出两端点即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2756/p2756.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6000/l6000.cpp)
-
 {% endnote %}
 
 ## 圆桌问题
@@ -89,11 +88,9 @@ mathjax: true
 如果有人没有安排上桌子，那么久直接输出0即可。
 如果所有人都安排上桌子了，就搜一下来确定方案。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p3000-p3999/p3254/p3254.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6004/l6004.cpp)
-
 {% endnote %} 
 
 ## 方格取数问题
@@ -108,11 +105,9 @@ mathjax: true
 
 由于最小割最大流定理，我们在求出最大流之后，拿所有格子的权值总和减去最大流即使我们要的答案。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2774/p2774.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6007/l6007.cpp)
-
 {% endnote %}
 
 ## 餐巾计划问题
@@ -129,11 +124,9 @@ mathjax: true
 
 然后跑一个最小费用最大流即可，最终的费用就是答案。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p1000-p1999/p1251/p1251.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6008/l6008.cpp)
-
 {% endnote %}
 
 ## 运输问题
@@ -144,11 +137,9 @@ mathjax: true
 
 跑费用流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p4000-p4999/p4015/p4015.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6011/l6011.cpp)
-
 {% endnote %}
 
 ## 分配问题
@@ -161,11 +152,9 @@ mathjax: true
 
 和上一道题惊人地相似。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p4000-p4999/p4014/p4014.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6012/l6012.cpp)
-
 {% endnote %}
 
 ## 负载平衡问题
@@ -179,11 +168,9 @@ mathjax: true
 
 然后跑费用流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p4000-p4999/p4016/p4016.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6013/l6013.cpp)
-
 {% endnote %}
 
 ## [CTSC1999]家园
@@ -196,11 +183,9 @@ mathjax: true
 
 然后每一天跑最大流，得到的最大流结果就是当天以及之前所有天的转移人数总和。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2754/p2754.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6015/l6015.cpp)
-
 {% endnote %}
 
 ## 航空路线问题
@@ -220,11 +205,9 @@ mathjax: true
 于是我们就直接大暴搜就可以了。
 还要注意起点终点直通的情况。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2770/p2770.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6122/l6122.cpp)
-
 {% endnote %}
 
 ## 深海机器人问题
@@ -237,11 +220,9 @@ mathjax: true
 
 然后跑一遍费用流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p4000-p4999/p4012/p4012.cpp)
 [`Libre OJ`](https://github.com/KaiserWilheim/OIcodes/blob/main/Libre%20OJ/6224/l6224.cpp)
-
 {% endnote %}
 
 # 最大流
@@ -251,10 +232,8 @@ mathjax: true
 最大流板子。
 将字符转换成数字进行建图即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2936/p2936.cpp)
-
 {% endnote %}
 
 ## 地震逃生
@@ -262,10 +241,8 @@ mathjax: true
 也是最大流板子，只不过在跑之前先要用并查集来判断一下连通性。
 当然也可以直接跑，判断最大流量是否为0。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p1000-p1999/p1343/p1343.cpp)
-
 {% endnote %}
 
 ## [SCOI2007] 蜥蜴
@@ -287,10 +264,8 @@ mathjax: true
 
 然后就跑最大流，得到的是可以逃离地图的蜥蜴个数的最大值，输出蜥蜴总数与其之差即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2472/p2472.cpp)
-
 {% endnote %}
 
 ## [USACO07OPEN] Dining G
@@ -301,12 +276,10 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 
 将匹配的主体（比如P2891的奶牛、P1402的顾客和P1231的练习册）拆成两个点，中间连一条容量为1的边，然后两个点分别与剩下的两种物品连边，然后跑最大流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu P2891`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2891/p2891.cpp)
 [`Luogu P1402`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p1000-p1999/p1402/p1402.cpp)
 [`Luogu P1231`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p1000-p1999/p1231/p1231.cpp)
-
 {% endnote %}
 
 ## 主主树
@@ -325,10 +298,27 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 
 注意我们需要将得到的最大流量与比赛的场次取`min`再输出，最后才是真正能赢的场数。（没比赛你赢个什么）
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p3000-p3999/p3701/p3701.cpp)
+{% endnote %}
 
+## [CQOI2014] 危桥
+
+往返算经过两次，所以我们可以将危桥所说的“经过两次”转化为“往返一次”。
+
+然后，危桥只能往返一次，普通桥能往返无数次，两个人分别想要往返 $a_n$ 次和 $b_n$ 次。
+
+于是我们就可以将一次往返当做一单位的流来走，$a_1$ 和 $b_1$ 连源点，$a_2$ 和 $b_2$ 连汇点，最大流就是能往返的最大次数。
+
+但是这样会忽略一些问题：从 $a_2$ 流出的流到底是来自 $a_1$ 的还是来自 $b_1$的？同理，从 $b_2$ 流出的流到底是来自 $a_1$ 的还是来自 $b_1$的？
+
+我们考虑反向跑一遍，只不过只针对于Bob。
+这次我们将$a_1$ 和 $b_2$ 连源点，$a_2$ 和 $b_1$ 连汇点，最大流看是否还与上一次相等。
+
+如果两次均等于 $a_n+b_n$ 的话，那么两人的愿望就可以达成，否则就不可以。
+
+{% note success %}
+[`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p3000-p3999/p3163/p3163.cpp)
 {% endnote %}
 
 # 二分图
@@ -343,10 +333,8 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 
 我们就可以用二分图最大匹配来解决这个问题。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p6000%2B/p7368/p7368.cpp)
-
 {% endnote %}
 
 # 最小割
@@ -362,10 +350,8 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 
 于是我们就可以用最小割来求解。让根节点连上源点，所有叶子结点连上汇点，然后跑最小割即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p3000-p3999/p3931/p3931.cpp)
-
 {% endnote %}
 
 ## [USACO5.4] 奶牛的电信Telecowmunication
@@ -381,10 +367,8 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 
 然后跑最小割。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p1000-p1999/p1345/p1345.cpp)
-
 {% endnote %}
 
 ## [SHOI2007] 善意的投票 / [JLOI2010] 冠军调查
@@ -410,10 +394,8 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 
 然后跑最小割即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2057/p2057.cpp)
-
 {% endnote %}
 
 # 费用流
@@ -425,10 +407,8 @@ $(0,0)$ 连向源点，$(n,n)$ 连向汇点。
 
 然后跑最大费用最大流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p1000-p1999/p1004/p1004.cpp)
-
 {% endnote %}
 
 ## [NOIP2008 提高组] 传纸条
@@ -438,10 +418,8 @@ $(0,0)$ 连向源点，$(n,m)$ 连向汇点。
 
 然后跑最大费用最大流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p1000-p1999/p1006/p1006.cpp)
-
 {% endnote %}
 
 ## [SDOI2006] 仓库管理员的烦恼
@@ -456,10 +434,8 @@ $(0,0)$ 连向源点，$(n,m)$ 连向汇点。
 
 然后跑费用流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2457/p2457.cpp)
-
 {% endnote %}
 
 ## [HAOI2010] 订货
@@ -472,10 +448,8 @@ $(0,0)$ 连向源点，$(n,m)$ 连向汇点。
 
 最后跑最小费用最大流即可。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2517/p2517.cpp)
-
 {% endnote %}
 
 ## [SDOI2009] 晨跑
@@ -487,14 +461,10 @@ $(0,0)$ 连向源点，$(n,m)$ 连向汇点。
 
 于是就建边，跑最小费用最大流。
 
-{% note success 示例代码 %}
-
+{% note success %}
 [`Luogu`](https://github.com/KaiserWilheim/OIcodes/blob/main/Luogu/p2000-p2999/p2153/p2153.cpp)
-
 {% endnote %}
 
-<!-- {% note success 示例代码 %}
-
-
+<!-- {% note success %}
 
 {% endnote %} -->

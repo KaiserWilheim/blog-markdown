@@ -27,7 +27,7 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 如果某一个板子是我自己写的，在它的附近会有一个 $\color[rgb]{1,1,0.0625}{φ}$ 的标志。这些板子保证运行的正确性。大胆褐，不会有事的（指运行结果）。
 如果某一个板子不是我写的，在它的附近会有一个 $\blacktriangleright$ 指向它的出处。这些板子不保证运行的正确性。使用之前请斟酌。 
 
-最后一次维护：20220420
+最后一次维护：20220525
 
 # OI
 
@@ -38,9 +38,6 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [杂项整理](/maths/mathematics) $\color[rgb]{0.067,0.270588,0.078431}{\natural}$ 
   写不成博客的东西都在这里。
 
-- [质数筛](/OI/prime-sieves) $\color[rgb]{0,0.5,1}{\sharp}$
-  包含埃氏筛，欧拉筛与 $Miller-Rabin$ 算法。
-
 - [欧拉与莫比乌斯](/maths/eular-and-möbius) $\color[rgb]{0,0.5,1}{\sharp}$
   包含欧拉函数、欧拉定理、莫比乌斯函数与莫比乌斯反演。
 
@@ -50,8 +47,11 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [傅里叶变换](/maths/fourier-transform) $\color[rgb]{0.5,0.4,0.4}{φ}$
   包含傅里叶变换和快速傅里叶变换，附带一些复数和单位根的知识。
 
-- [拉格朗日插值](/maths/lagrange-interpolation) $\color[rgb]{1,0,0}{\flat}$
+- [拉格朗日插值](/maths/lagrange-interpolation) $\color[rgb]{0.5,0.4,0.4}{φ}$
   包括拉格朗日插值。
+
+- [矩阵](/maths/matrix/) $\color[rgb]{0,0.5,1}{\sharp}$
+  矩阵相关运算，以及矩阵在OI中的运用。
 
 ## 算法
 
@@ -66,6 +66,9 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [点分治](/OI/point-divide) $\color[rgb]{0,0.5,1}{\sharp}$
   点分治与点分树。
 
+- [差分约束](/OI/difference-constraint/) $\color[rgb]{0,0.5,1}{\sharp}$
+  一种用来解决不等式组求解的算法。
+
 ## 数据结构
 
 啊这……这里该怎么写……
@@ -76,7 +79,20 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [线段树](/OI/segment-tree) $\color[rgb]{0,0.5,1}{\sharp}$
   线段树相关内容，包括动态开点线段树、可持久化权值线段树等。
 
-- [Trie 与 AC自动机](/OI/trie-and-AK-avtomat) $\color[rgb]{0,0.5,1}{\sharp}$
+- [替罪羊树](/OI/scapegoat-tree/) $\color[rgb]{0,0.5,1}{\sharp}$
+  一种利用暴力重构维护平衡的平衡树。
+
+- [Splay](/OI/splay/) $\color[rgb]{0,0.5,1}{\sharp}$
+  一种基于旋转的平衡树。
+
+## 字符串
+
+字符串的处理和询问一直是OI中比较重要的内容。
+
+- [KMP算法与前缀函数](/OI/kmp/) $\color[rgb]{0,0.5,1}{\sharp}$
+  一种用来快速查询模式串在文本串中的出现次数的算法。
+
+- [Trie与AC自动机](/OI/trie-and-AK-avtomat) $\color[rgb]{0,0.5,1}{\sharp}$
    Trie与AC自动机，同时包括可持久化Trie。
   
 - [后缀数组](/OI/suffix-array) $\color[rgb]{0,0.5,1}{\sharp}$ 
@@ -85,11 +101,6 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [后缀自动机](/OI/suffix-avtomat) $\color[rgb]{0,0.5,1}{\sharp}$ 
   如题，后缀自动机。
 
-- [Splay](/OI/splay) $\color[rgb]{0.5,0.4,0.4}{φ}$
-  如题，Splay。
-
-- [Link/Cut Tree](/OI/link-cut-tree) $\color[rgb]{0.5,0.4,0.4}{φ}$
-  如题，LCT。
 
 ## 图论相关
 
@@ -105,19 +116,17 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 
 题解还会有没写完的吗？
 
-- [Luogu P1061](/solutions/solution-p1061) Jam的计数法
 - [Luogu P1117](/solutions/solution-p1117) [NOI2016] 优秀的拆分
 - [Luogu P1251](/solutions/solution-p1251) 餐巾计划问题
 - [Luogu P1486](/solutions/solution-p1486) [NOI2004] 郁闷的出纳员
 - [Luogu P1505](/solutions/solution-p1505) [国家集训队] 旅游
 - [Luogu P2042](/solutions/solution-p2042) [NOI2005] 维护数列
 - [Luogu P2146](/solutions/solution-p2146) 软件包管理器
-- [Luogu P2234](/solutions/solution-p2234) 营业额统计
 - [Luogu P2414](/solutions/solution-p2414) [NOI2011] 阿狸的打字机
 - [Luogu P3586](/solutions/solution-p3586) [POI2015] Logistyka
-- [Luogu P3982](/solutions/solution-p3982) 龙盘雪峰信息解析器
-- [Luogu P7075](/solutions/solution-p7075) 儒略日
-- [Luogu P7913](/solutions/solution-p7913) 廊桥分配
+- [Luogu P3644](/solutions/solution-p3644) [APIO2015] 巴邻旁之桥
+- [Luogu P4551](/solutions/solution-p4551) 最长异或路径
+- [Luogu P4643](/solutions/solution-p4643) [国家集训队] 阿狸和桃子的游戏
 
 + [LibreOJ #2759](/solutions/solution-l2759) 蜜袋鼯（フクロモモンガ）
 + [LibreOJ #2980](/solutions/solution-l2980) 「THUSCH 2017」 大魔法师
