@@ -81,120 +81,22 @@ mathjax: true
 
 {% tabs model %}
 <!-- tab Luogu板子题1 -->
+
 Luogu P3374 【模板】 树状数组1：https://www.luogu.com.cn/problem/P3374
 
-``` cpp
-#include <bits/stdc++.h>
-using namespace std;
-const int N = 500010;
-int a[N], tr[N];
-int n, m;
-int lowbit(int a)
-{
-	return a & -a;
-}
-void add(int x, int c)
-{
-	for(int i = x; i <= n; i += lowbit(i))
-		tr[i] += c;
-	return;
-}
-int sum(int x)
-{
-	int res = 0;
-	for(int i = x; i; i -= lowbit(i))
-		res += tr[i];
-	return res;
-}
-int main()
-{
-	cin >> n >> m;
-	for(int i = 1; i <= n; i++)
-	{
-		cin >> a[i];
-		add(i, a[i]);
-	}
-	for(int i = 1; i <= m; i++)
-	{
-		int op, x, y;
-		cin >> op >> x >> y;
-		if(op == 1)
-		{
-			a[x] += y;
-			add(x, y);
-		}
-		else
-		{
-			int res = sum(y) - sum(x - 1);
-			cout << res << endl;
-		}
-	}
-	return 0;
-}
-```
+示例代码：[`Luogu P3374`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3374/p3374.cpp)
+
 <!-- endtab -->
 
 <!-- tab Luogu板子题2 -->
 
 Luogu P3368 【模板】 树状数组2：https://www.luogu.com.cn/problem/P3368
 
-{% note info 思路 %}
-维护差分序列，而不是原序列。
+{% note info %}
+思路：维护差分序列，而不是原序列。
 {% endnote %}
 
-``` cpp
-#include <bits/stdc++.h>
-using namespace std;
-const int N = 500010;
-int num[N], a[N], tr[N];
-int idx, hd, n;
-int lowbit(int a)
-{
-	return a & -a;
-}
-void add(int x, int c)
-{
-	for(int i = x; i <= n; i += lowbit(i))
-		tr[i] += c;
-	return;
-}
-int sum(int x)
-{
-	int res = 0;
-	for(int i = x; i; i -= lowbit(i))
-		res += tr[i];
-	return res;
-}
-int main()
-{
-	int m;
-	cin >> n >> m;
-	for(int i = 1; i <= n; i++)
-	{
-		cin >> num[i];
-		a[i] = num[i] - num[i - 1];
-		add(i, a[i]);
-	}
-	for(int i = 1; i <= m; i++)
-	{
-		int op;
-		cin >> op;
-		if(op == 1)
-		{
-			int x, y, k;
-			cin >> x >> y >> k;
-			add(x, k);
-			add(y + 1, -k);
-		}
-		else if(op == 2)
-		{
-			int x;
-			cin >> x;
-			cout << sum(x) << endl;
-		}
-	}
-	return 0;
-}
-```
+示例代码：[`Luogu P3368`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3368/p3368.cpp)
+
 <!-- endtab -->
 {% endtabs %}

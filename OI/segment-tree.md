@@ -171,222 +171,13 @@ void pushdown(int p)
 
 # 例题
 
-{% note info 例题1 %}
-
 [Luogu P3372 【模板】线段树 1](https://www.luogu.com.cn/problem/P3372)
 
-``` cpp
-#include <bits/stdc++.h>
-using namespace std;
-#define ll long long
-const int N = 100010;
-struct SegTree
-{
-	int l, r;
-	ll sum, tag;
-}tr[N << 3];
-ll a[N];
-
-void pushup(int p)
-{
-	tr[p].sum = tr[p << 1].sum + tr[p << 1 | 1].sum;
-}
-void pushdown(int p)
-{
-	auto &root = tr[p], &left = tr[p << 1], &rght = tr[p << 1 | 1];
-	if(root.tag)
-	{
-		left.sum += root.tag * (left.r - left.l + 1);
-		rght.sum += root.tag * (rght.r - rght.l + 1);
-		left.tag += root.tag;
-		rght.tag += root.tag;
-		root.tag = 0;
-	}
-	return;
-}
-
-void build(int p, int l, int r)
-{
-	tr[p].l = l, tr[p].r = r;
-	if(l == r)
-	{
-		tr[p].sum = a[l];
-		return;
-	}
-	int mid = (l + r) >> 1;
-	build(p << 1, l, mid);
-	build(p << 1 | 1, mid + 1, r);
-	pushup(p);
-}
-
-void segadd(int p, int l, int r, int k)
-{
-	if(tr[p].l >= l && tr[p].r <= r)
-	{
-		tr[p].tag += k;
-		tr[p].sum += k * (tr[p].r - tr[p].l + 1);
-		return;
-	}
-	pushdown(p);
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	if(l <= mid)segadd(p << 1, l, r, k);
-	if(r > mid)segadd(p << 1 | 1, l, r, k);
-	pushup(p);
-}
-ll segsum(int p, int l, int r)
-{
-	if(tr[p].l >= l && tr[p].r <= r)return tr[p].sum;
-	pushdown(p);
-	ll res = 0;
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	if(l <= mid)res += segsum(p << 1, l, r);
-	if(r > mid)res += segsum(p << 1 | 1, l, r);
-	return res;
-}
-
-int main()
-{
-	int n, m;
-	scanf("%d%d", &n, &m);
-	for(int i = 1; i <= n; i++)scanf("%lld", &a[i]);
-	build(1, 1, n);
-	while(m--)
-	{
-		int op, x, y, k;
-		scanf("%d%d%d", &op, &x, &y);
-		if(op == 1)
-		{
-			scanf("%d", &k);
-			segadd(1, x, y, k);
-		}
-		else if(op == 2)
-		{
-			printf("%lld\n", segsum(1, x, y));
-		}
-	}
-	return 0;
-}
-```
-
-{% endnote %}
-
-{% note info 例题2 %}
+参考代码：[Luogu P3372](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3372/p3372.cpp)
 
 [Luogu P3373 【模板】线段树 2](https://www.luogu.com.cn/problem/P3373)
 
-``` cpp
-#include <bits/stdc++.h>
-using namespace std;
-int n, m, d;
-const int N = 100010;
-int a[N];
-struct segtree
-{
-	int l, r;
-	long long v, ta, tm;
-}node[N << 2];
-void build(int p, int l, int r)
-{
-	node[p].l = l, node[p].r = r, node[p].ta = 0, node[p].tm = 1;
-	if(l == r)
-	{
-		node[p].v = a[r];
-		return;
-	}
-	int mid = (l + r) >> 1;
-	build(p << 1, l, mid);
-	build(p << 1 | 1, mid + 1, r);
-	node[p].v = (node[p << 1].v + node[p << 1 | 1].v) % d;
-	return;
-}
-void tag(int p)
-{
-	auto &root = node[p], &left = node[p << 1], &rght = node[p << 1 | 1];
-	if((root.ta != 0) || (root.tm != 1))
-	{
-		left.tm = (left.tm * root.tm) % d, left.ta = (left.ta * root.tm + root.ta) % d;
-		rght.tm = (rght.tm * root.tm) % d, rght.ta = (rght.ta * root.tm + root.ta) % d;
-		left.v = (left.v * root.tm + root.ta * (left.r - left.l + 1)) % d;
-		rght.v = (rght.v * root.tm + root.ta * (rght.r - rght.l + 1)) % d;
-		root.ta = 0, root.tm = 1;
-	}
-	return;
-}
-void segadd(int p, int l, int r, int k)
-{
-	if((node[p].r <= r) && (node[p].l >= l))
-	{
-		node[p].ta = (node[p].ta + k) % d;
-		node[p].v = (node[p].v + k * (node[p].r - node[p].l + 1)) % d;
-		return;
-	}
-	if((node[p].r < l) || (node[p].l > r))return;
-	tag(p);
-	int mid = (node[p].r + node[p].l) >> 1;
-	if(mid >= l)segadd(p << 1, l, r, k);
-	if(mid < r)segadd(p << 1 | 1, l, r, k);
-	node[p].v = (node[p << 1].v + node[p << 1 | 1].v) % d;
-	return;
-}
-void segmul(int p, int l, int r, int k)
-{
-	if((node[p].r <= r) && (node[p].l >= l))
-	{
-		node[p].tm = (node[p].tm * k) % d;
-		node[p].ta = (node[p].ta * k) % d;
-		node[p].v = (node[p].v * k) % d;
-		return;
-	}
-	if((node[p].r < l) || (node[p].l > r))return;
-	tag(p);
-	int mid = (node[p].r + node[p].l) >> 1;
-	if(mid >= l)segmul(p << 1, l, r, k);
-	if(mid < r)segmul(p << 1 | 1, l, r, k);
-	node[p].v = (node[p << 1].v + node[p << 1 | 1].v) % d;
-	return;
-}
-long long segsum(int p, int l, int r)
-{
-	if((node[p].r <= r) && (node[p].l >= l))return node[p].v;
-	if((node[p].r < l) || (node[p].l > r))return 0;
-	tag(p);
-	int mid = (node[p].r + node[p].l) >> 1;
-	long long ans = 0;
-	if(mid >= l)ans = ans + segsum(p << 1, l, r);
-	if(mid < r)ans = ans + segsum(p << 1 | 1, l, r);
-	return ans % d;
-}
-int main()
-{
-	scanf("%d%d%d", &n, &m, &d);
-	for(int i = 1; i <= n; i++)scanf("%d", &a[i]);
-	build(1, 1, n);
-	for(int i = 1; i <= m; i++)
-	{
-		int op;
-		scanf("%d", &op);
-		if(op == 1)
-		{
-			int x, y, k;
-			scanf("%d%d%d", &x, &y, &k);
-			segmul(1, x, y, k);
-		}
-		else if(op == 2)
-		{
-			int x, y, k;
-			scanf("%d%d%d", &x, &y, &k);
-			segadd(1, x, y, k);
-		}
-		else if(op == 3)
-		{
-			int x, y;
-			scanf("%d%d", &x, &y);
-			printf("%lld\n", segsum(1, x, y));
-		}
-	}
-}
-```
-{% endnote %}
+参考代码：[Luogu P3373](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3373/p3373.cpp)
 
 # 扩展
 
@@ -590,160 +381,15 @@ int segsum(int p, int l, int r)
 
 而这也就是主席树维护区间第 $k$ 小的主要思想。
 
-{% note info 例题 %}
+### 例题
 
-Luogu P3834 【模板】可持久化线段树 2：https://www.luogu.com.cn/problem/P3834
+[Luogu P3834 【模板】可持久化线段树 2](https://www.luogu.com.cn/problem/P3834)
 
-``` cpp
-#include<bits/stdc++.h>
-using namespace std;
-const int N = 200010, M = 200010;
-int n, m; int a[N];
-vector<int>nums;
-struct Node
-{
-	int l, r;
-	int cnt;
-}tr[N * 4 + N * 17]; int root[N], idx;
-int find(int x) { return lower_bound(nums.begin(), nums.end(), x) - nums.begin(); }
-int build(int l, int r)
-{
-	int p = ++idx;
-	if(l == r)return p;
-	int mid = l + r >> 1;
-	tr[p].l = build(l, mid);
-	tr[p].r = build(mid + 1, r);
-	return p;
-}
-int insert(int p, int l, int r, int x)
-{
-	int q = ++idx;
-	tr[q] = tr[p];
-	if(l == r)
-	{
-		tr[q].cnt++;
-		return q;
-	}
-	int mid = l + r >> 1;
-	if(x <= mid)tr[q].l = insert(tr[p].l, l, mid, x);
-	else tr[q].r = insert(tr[p].r, mid + 1, r, x);
-	tr[q].cnt = tr[tr[q].l].cnt + tr[tr[q].r].cnt;
-	return q;
-}
-int query(int q, int p, int l, int r, int k)
-{
-	if(l == r)return r;
-	int cnt = tr[tr[q].l].cnt - tr[tr[p].l].cnt;
-	int mid = l + r >> 1;
-	if(k <= cnt)return query(tr[q].l, tr[p].l, l, mid, k);
-	else return query(tr[q].r, tr[p].r, mid + 1, r, k - cnt);
-}
-int main()
-{
-	scanf("%d%d", &n, &m);
-	for(int i = 1; i <= n; i++)
-	{
-		scanf("%d", &a[i]);
-		nums.push_back(a[i]);
-	}
-	sort(nums.begin(), nums.end());
-	nums.erase(unique(nums.begin(), nums.end()), nums.end());
-	root[0] = build(0, nums.size() - 1);
-	for(int i = 1; i <= n; i++)
-		root[i] = insert(root[i - 1], 0, nums.size() - 1, find(a[i]));
-	while(m--)
-	{
-		int l, r, k;
-		scanf("%d%d%d", &l, &r, &k);
-		printf("%d\n", nums[query(root[r], root[l - 1], 0, nums.size() - 1, k)]);
-	}
-	return 0;
-}
-```
-{% endnote %}
+参考代码：[`Luogu P3834`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3834/p3834.cpp)
 
-{% note info 可持久化的普通线段树例题 %}
+[Luogu P3919 【模板】可持久化线段树 1（可持久化数组）](https://www.luogu.com.cn/problem/P3919)
 
-Luogu P3919 【模板】可持久化线段树 1（可持久化数组）：https://www.luogu.com.cn/problem/P3919
-
-``` cpp
-#include<bits/stdc++.h>
-using namespace std;
-const int N = 1000010, M = N;
-int n, m;
-struct node
-{
-	int l, r;
-	int v;
-}tr[(N << 2) + (M * 20)];
-int root[M], idx = 0;
-int a[N];
-int build(int l, int r)
-{
-	int p = ++idx;
-	if(l == r)
-	{
-		tr[p].v = a[r];
-		return p;
-	}
-	int mid = (l + r) >> 1;
-	tr[p].l = build(l, mid);
-	tr[p].r = build(mid + 1, r);
-	//tr[p].v = tr[tr[p].l].v + tr[tr[p].r].v;
-	return p;
-}
-int change(int p, int l, int r, int loc, int val)
-{
-	int q = ++idx;
-	tr[q] = tr[p];
-	if(l == r)
-	{
-		tr[q].v = val;
-		return q;
-	}
-	int mid = (l + r) >> 1;
-	if(loc <= mid)tr[q].l = change(tr[p].l, l, mid, loc, val);
-	else tr[q].r = change(tr[p].r, mid + 1, r, loc, val);
-	//tr[q].v = tr[tr[q].l].v + tr[tr[q].r].v;
-	return q;
-}
-int search(int p, int l, int r, int loc)
-{
-	if(l ==r)return tr[p].v;
-	int mid = (l + r) >> 1;
-	if(loc <= mid)return search(tr[p].l, l, mid, loc);
-	else return search(tr[p].r, mid + 1, r, loc);
-}
-int main()
-{
-	scanf("%d%d", &n, &m);
-	for(int i = 1; i <= n; i++)scanf("%d", &a[i]);
-	root[1] = build(1, n);
-	root[0]++;
-	int op, ver, loc, val;
-	while(m--)
-	{
-		scanf("%d%d%d", &ver, &op, &loc);
-		ver++;
-		if(op == 1)
-		{
-			scanf("%d", &val);
-			root[++root[0]] = change(root[ver], 1, n, loc, val);
-		}
-		else if(op == 2)
-		{
-			printf("%d\n", search(root[ver], 1, n, loc));
-			root[++root[0]] = root[ver];
-		}
-		else
-		{
-			puts("Youwike AK IOI!");
-		}
-	}
-	return 0;
-}
-```
-{% endnote %}
+参考代码：[`Luogu P3919`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3919/p3919.cpp)
 
 ## 区间最大子段和
 
@@ -815,177 +461,49 @@ void modify(int p, int pos, int k)
 }
 ```
 
-{% note info [Luogu P6792 [SNOI2020] 区间和](https://www.luogu.com.cn/problem/P6792) %}
+{% note info [SNOI2020] 区间和 %}
 
 暴力修改，不是正解。
 能过官方数据，但是不能过Hack数据。
 
-``` cpp
-#include<bits/stdc++.h>
-using namespace std;
-#define ll long long
-const int N = 100010;
-struct SegTree
-{
-	int l, r;
-	ll lms, rms;
-	ll ms, sum;
+提交记录：
 
-	friend SegTree operator + (const SegTree &lhs, const SegTree &rhs)
-	{
-		return
-		{
-			lhs.l,
-			rhs.r,
-			max(lhs.lms, rhs.lms + lhs.sum),
-			max(rhs.rms, lhs.rms + rhs.sum),
-			max(lhs.rms + rhs.lms, max(lhs.ms, rhs.ms)),
-			lhs.sum + rhs.sum
-		};
-	}
-}tr[N << 3];
-ll a[N];
-void build(int p, int l, int r)
-{
-	tr[p].l = l, tr[p].r = r;
-	if(l == r)
-	{
-		tr[p] = { l,r,max(0ll,a[l]),max(0ll,a[l]),max(0ll,a[l]),a[l] };
-		return;
-	}
-	int mid = (l + r) >> 1;
-	build(p << 1, l, mid);
-	build(p << 1 | 1, mid + 1, r);
-	tr[p] = tr[p << 1] + tr[p << 1 | 1];
-	return;
-}
-void modify(int p, int pos, ll k)
-{
-	if(tr[p].l == tr[p].r)
-	{
-		tr[p] = { tr[p].l,tr[p].r,max(k,0ll),max(k,0ll),max(k,0ll),k };
-		return;
-	}
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	if(pos <= mid)modify(p << 1, pos, k);
-	if(pos > mid)modify(p << 1 | 1, pos, k);
-	tr[p] = tr[p << 1] + tr[p << 1 | 1];
-	return;
-}
-SegTree query(int p, int l, int r)
-{
-	if(tr[p].l >= l && tr[p].r <= r)return tr[p];
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	if(r <= mid)return query(p << 1, l, r);
-	else if(l > mid)return query(p << 1 | 1, l, r);
-	else return query(p << 1, l, r) + query(p << 1 | 1, l, r);
-}
+洛谷：[题面](https://www.luogu.com.cn/problem/P6792)；[记录](https://www.luogu.com.cn/record/74060608)。
+LibreOJ：[题面](https://loj.ac/p/3325)；[记录](https://loj.ac/s/1470856)。
 
-int main()
-{
-	int m, n;
-	scanf("%d%d", &n, &m);
-	for(int i = 1; i <= n; i++)
-		scanf("%lld", &a[i]);
-	build(1, 1, n);
-	while(m--)
-	{
-		int op, l, r;
-		scanf("%d%d%d", &op, &l, &r);
-		if(op == 0)
-		{
-			ll k;
-			scanf("%lld", &k);
-			for(int i = l; i <= r; i++)
-			{
-				if(k > a[i])
-				{
-					a[i] = k;
-					modify(1, i, k);
-				}
-
-			}
-		}
-		else if(op == 1)
-		{
-			SegTree res = query(1, l, r);
-			printf("%lld\n", res.ms);
-		}
-	}
-	return 0;
-}
-```
 {% endnote %}
 
+## 线段树优化建图
 
+线段树优化建图，又称线段树优化连边，是一种处理区间连边的方法。
 
+有时候题目会让我们从一个点 $w$ 向一段区间 $\[ l,r \]$ 内的所有点连上一条边权相等的边。
 
+连边数量少的时候我们尚且还可以通过枚举来暴力建边，而当连边数量多起来的时候时间复杂度就不符合我们的要求了。
 
+我们可以利用线段树来辅助我们建图。
 
+线段树上的每一个节点都是一个虚拟的节点，其分别向其左儿子和右儿子连接一条没有影响的边。
+这里的“没有影响”不仅指边权为0，还可以指流量为 $+\infty$、费用为0等等。
 
+网络流相关的题目中利用这种方式优化建图的很多。
 
+建图的时候，我们首先建立线段树，建立 $2^{\lfloor \log{n} \rfloor +1}$ 个节点和 $2^{\lfloor \log{n} \rfloor +2}$ 条双向边。
 
+然后就是处理区间连边问题。
+我们就像正常的线段树区间加一样，函数递归时，如果遇到了被完全包含在询问区间内的第一个区间，就从我们指定的点向代表该区间的点连一条边并返回即可。
 
+### 例题：
 
+[洛谷 P8021](https://www.luogu.com.cn/problem/P8021) [ONTAK2015] Bajtman i Okrągły Robin
 
+如果我们使用暴力建图的话，可以想到的是把每一个 Robin 向他能抢劫的时间点连一条容量为1、费用为 $c_i$ 的边。同时，源点向每一个 Robin 连一条容量为1费用为0的边，每一个时间点向汇点连一条容量为1费用为0的边，然后跑最大费用最大流就可以了。
 
+我们如果使用线段树建图的话，就仿照上面的方法，到线段树上连边就可以了。因为我们是在这一段区间内选一个时间点抢劫，所以我们连边的时候仍然保持上面的方式，容量为1、费用为 $c_i$。
 
+题解：[洛谷题解](https://www.luogu.com.cn/blog/Kaiser-Wilheim/solution-p8021)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+参考代码：[Luogu P8021](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p6000+/p8021/p8021.cpp)
 
 
 

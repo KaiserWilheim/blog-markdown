@@ -17,7 +17,7 @@ Luogu P3384
 # 引言
 
 树链剖分（简称“树剖”，又称“重链剖分”）是一种将一棵树转化为一段连续的区间的方法。
-这种方法可以将一棵树根据子树大小，也就是所谓的“重儿子”和“轻儿子”，来将一棵树划分成若干条”重链“，并可以保证，在任意一条路径上的连续的链都不超过 $\log_2n$ 个。
+这种方法可以将一棵树根据子树大小，也就是所谓的“重儿子”和“轻儿子”，来将一棵树划分成若干条”重链“，并可以保证，在任意一条路径上的连续的链都不超过 $\log_2{n}$ 个。
 
 树剖可以借助一些数据结构（如线段树）来以 $O(\log n)$ 的复杂度维护数上路径的信息，如“修改**树上两点之间的路径上**所有点的值”和“查询**树上两点之间的路径上**节点权值的**和/极值/其他**(在序列上可以用数据结构维护的、便于合并的信息)”等等。
 
@@ -94,7 +94,6 @@ void add(int a, int b)
 	return
 }
 ```
-$\color[rgb]{1,1,0.0625}{φ}$
 
 第一个DFS记录了每个节点的父节点(vater)、深度(depth)、子树大小(sz)和重儿子(son)：
 
@@ -113,7 +112,6 @@ void dfs1(int p, int vater, int depth)
 	return
 }
 ```
-$\color[rgb]{1,1,0.0625}{φ}$
 
 第二个DFS记录了每个节点所在重链的链顶节点(top)、dfs序(id)和重新定向的节点权值(nw)：
 
@@ -132,7 +130,6 @@ void dfs2(int p, int t)
 	return
 }
 ```
-$\color[rgb]{1,1,0.0625}{φ}$
 
 # 应用
 
@@ -140,137 +137,17 @@ $\color[rgb]{1,1,0.0625}{φ}$
 
 # 例题
 
+## 板子题
+
 洛谷上面提供了板子题。
 题面见[这里](https://www.luogu.com.cn/problem/P3384)。
 代码正确性见[提交记录](https://www.luogu.com.cn/record/65907262)。
 
-我们首先照常打出线段树部分（~~不会的可以看[这篇博客]()~~各位读者们一定已经会线段树了罢）
+我们首先照常打出线段树部分（~~不会的可以看[这篇博客]()~~各位读者们一定已经会线段树了罢）；
+两个DFS也是已经有了的代码（见上面）；
+然后就有了这篇代码的核心部分。
 
-两个DFS也是已经有了的代码（见上面）
-
-然后就有了这篇代码的核心部分：
-
-{% note default 核心代码 %}
-``` cpp
-#include<bits/stdc++.h>
-using namespace str;
-#define ll long long
-const int N = 100010, M = N << 1;
-int n, m, rt, mod;
-int w[N], h[N], e[M], ne[M], idx;
-int id[N], nw[N], cnt;
-int dep[N], sz[N], top[N], fa[N], son[N];
-struct segtree
-{
-	int l, r;
-	ll add, sum;
-}tr[N << 3];
-void add(int a, int b)
-{
-	e[idx] = b, ne[idx] = h[a], h[a] = idx++;
-	return;
-}
-void dfs1(int p, int father, int depth)
-{
-	dep[p] = depth, fa[p] = father, sz[p] = 1;
-	for(int i = h[p]; ~i; i = ne[i])
-	{
-		int j = e[i];
-		if(j == father) continue;
-		dfs1(j, p, depth + 1);
-		sz[p] += sz[j];
-		if(sz[son[p]] < sz[j]) son[p] = j;
-	}
-	return;
-}
-void dfs2(int p, int t)
-{
-	id[p] = ++cnt, nw[cnt] = w[p], top[p] = t;
-	if(!son[p]) return;
-	dfs2(son[p], t);
-	for(int i = h[p]; ~i; i = ne[i])
-	{
-		int j = e[i];
-		if(j == fa[p] || j == son[p]) continue;
-		dfs2(j, j);
-	}
-	return;
-}
-void pushup(int p)
-{
-	tr[p].sum = (tr[p << 1].sum + tr[p << 1 | 1].sum) % mod;
-	return;
-}
-void pushdown(int p)
-{
-	auto &root = tr[p], &left = tr[p << 1], &rght = tr[p << 1 | 1];
-	if(root.add)
-	{
-		left.add = (left.add + root.add) % mod;
-		left.sum = (left.sum + root.add * (left.r - left.l + 1)) % mod;
-		rght.add = (rght.add + root.add) % mod;
-		rght.sum = (rght.sum + root.add * (rght.r - rght.l + 1)) % mod;
-		root.add = 0;
-	}
-	return;
-}
-void build(int p, int l, int r)
-{
-	tr[p] = { l, r, 0, nw[r] };
-	if(l == r) return;
-	int mid = (l + r) >> 1;
-	build(p << 1, l, mid);
-	build(p << 1 | 1, mid + 1, r);
-	pushup(p);
-	return;
-}
-void segadd(int p, int l, int r, int k)
-{
-	if((l <= tr[p].l) && (r >= tr[p].r))
-	{
-		tr[p].add = (tr[p].add + k) % mod;
-		tr[p].sum = (tr[p].sum + k * (tr[p].r - tr[p].l + 1)) % mod;
-		return;
-	}
-	pushdown(p);
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	if(l <= mid) segadd(p << 1, l, r, k);
-	if(r > mid) segadd(p << 1 | 1, l, r, k);
-	pushup(p);
-	return;
-}
-ll segsum(int p, int l, int r)
-{
-	if((l <= tr[p].l) && (r >= tr[p].r)) return tr[p].sum;
-	pushdown(p);
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	ll res = 0;
-	if(l <= mid) res += segsum(p << 1, l, r);
-	if(r > mid) res += segsum(p << 1 | 1, l, r);
-	return res % mod;
-}
-int main()
-{
-	scanf("%d%d%d%d", &n, &m, &rt, &mod);
-	for(int i = 1; i <= n; i++) scanf("%d", &w[i]);
-	memset(h, -1, sizeof h);
-	for(int i = 0; i < n - 1; i++)
-	{
-		int a, b;
-		scanf("%d%d", &a, &b);
-		add(a, b);
-		add(b, a);
-	}
-	dfs1(rt, 0, 1);
-	dfs2(rt, rt);
-	build(1, 1, n);
-	return 0;
-}
-```
-{% endnote %}
-$\color[rgb]{1,1,0.0625}{φ}$
-
-然后就是对题目要求功能的实现。
+之后就是对题目要求功能的实现。
 
 题目要求我们这样做：
 
@@ -294,7 +171,6 @@ ll sumtree(int p)
 	return segsum(1, id[p], id[p] + sz[p] - 1);
 }
 ```
-$\color[rgb]{1,1,0.0625}{φ}$
 
 而对于路径的操作，我们使用这样一种策略：边走边计算。
 首先，我们求出这一条最短路，也就是求出它们的最近公共祖先。
@@ -331,185 +207,15 @@ ll sumpath(int p, int q)
 	return res % mod;
 }
 ```
-$\color[rgb]{1,1,0.0625}{φ}$
 
-最后放一遍完整代码：
+最后放一遍完整代码：[`Luogu P3384`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3384/p3384.cpp)
 
-{% note success 完整代码 %}
-``` cpp
-#include<bits/stdc++.h>
-using namespace std;
-#define ll long long
-const int N = 100010, M = N << 1;
-int n, m, rt, mod;
-int w[N], h[N], e[M], ne[M], idx;
-int id[N], nw[N], cnt;
-int dep[N], sz[N], top[N], fa[N], son[N];
-struct segtree
-{
-	int l, r;
-	ll add, sum;
-}tr[N << 3];
-void add(int a, int b)
-{
-	e[idx] = b, ne[idx] = h[a], h[a] = idx++;
-	return;
-}
-void dfs1(int p, int father, int depth)
-{
-	dep[p] = depth, fa[p] = father, sz[p] = 1;
-	for(int i = h[p]; ~i; i = ne[i])
-	{
-		int j = e[i];
-		if(j == father) continue;
-		dfs1(j, p, depth + 1);
-		sz[p] += sz[j];
-		if(sz[son[p]] < sz[j]) son[p] = j;
-	}
-	return;
-}
-void dfs2(int p, int t)
-{
-	id[p] = ++cnt, nw[cnt] = w[p], top[p] = t;
-	if(!son[p]) return;
-	dfs2(son[p], t);
-	for(int i = h[p]; ~i; i = ne[i])
-	{
-		int j = e[i];
-		if(j == fa[p] || j == son[p]) continue;
-		dfs2(j, j);
-	}
-	return;
-}
-void pushup(int p)
-{
-	tr[p].sum = (tr[p << 1].sum + tr[p << 1 | 1].sum) % mod;
-	return;
-}
-void pushdown(int p)
-{
-	auto &root = tr[p], &left = tr[p << 1], &rght = tr[p << 1 | 1];
-	if(root.add)
-	{
-		left.add = (left.add + root.add) % mod;
-		left.sum = (left.sum + root.add * (left.r - left.l + 1)) % mod;
-		rght.add = (rght.add + root.add) % mod;
-		rght.sum = (rght.sum + root.add * (rght.r - rght.l + 1)) % mod;
-		root.add = 0;
-	}
-	return;
-}
-void build(int p, int l, int r)
-{
-	tr[p] = { l, r, 0, nw[r] };
-	if(l == r) return;
-	int mid = (l + r) >> 1;
-	build(p << 1, l, mid);
-	build(p << 1 | 1, mid + 1, r);
-	pushup(p);
-	return;
-}
-void segadd(int p, int l, int r, int k)
-{
-	if((l <= tr[p].l) && (r >= tr[p].r))
-	{
-		tr[p].add = (tr[p].add + k) % mod;
-		tr[p].sum = (tr[p].sum + k * (tr[p].r - tr[p].l + 1)) % mod;
-		return;
-	}
-	pushdown(p);
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	if(l <= mid) segadd(p << 1, l, r, k);
-	if(r > mid) segadd(p << 1 | 1, l, r, k);
-	pushup(p);
-	return;
-}
-ll segsum(int p, int l, int r)
-{
-	if((l <= tr[p].l) && (r >= tr[p].r)) return tr[p].sum;
-	pushdown(p);
-	int mid = (tr[p].l + tr[p].r) >> 1;
-	ll res = 0;
-	if(l <= mid) res += segsum(p << 1, l, r);
-	if(r > mid) res += segsum(p << 1 | 1, l, r);
-	return res % mod;
-}
-void addpath(int p, int q, int k)
-{
-	while(top[p] != top[q])
-	{
-		if(dep[top[p]] < dep[top[q]]) swap(p, q);
-		segadd(1, id[top[p]], id[p], k);
-		p = fa[top[p]];
-	}
-	if(dep[p] < dep[q]) swap(p, q);
-	segadd(1, id[q], id[p], k);
-	return;
-}
-ll sumpath(int p, int q)
-{
-	ll res = 0;
-	while(top[p] != top[q])
-	{
-		if(dep[top[p]] < dep[top[q]]) swap(p, q);
-		res += segsum(1, id[top[p]], id[p]);
-		p = fa[top[p]];
-	}
-	if(dep[p] < dep[q]) swap(p, q);
-	res += segsum(1, id[q], id[p]);
-	return res % mod;
-}
-void addtree(int p, int k)
-{
-	segadd(1, id[p], id[p] + sz[p] - 1, k);
-	return;
-}
-ll sumtree(int p)
-{
-	return segsum(1, id[p], id[p] + sz[p] - 1);
-}
-int main()
-{
-	scanf("%d%d%d%d", &n, &m, &rt, &mod);
-	for(int i = 1; i <= n; i++) scanf("%d", &w[i]);
-	memset(h, -1, sizeof h);
-	for(int i = 0; i < n - 1; i++)
-	{
-		int a, b;
-		scanf("%d%d", &a, &b);
-		add(a, b);
-		add(b, a);
-	}
-	dfs1(rt, 0, 1);
-	dfs2(rt, rt);
-	build(1, 1, n);
-	while(m--)
-	{
-		int op, x, y, z;
-		scanf("%d%d", &op, &x);
-		if(op == 1)
-		{
-			scanf("%d%d", &y, &z);
-			addpath(x, y, z);
-		}
-		else if(op == 2)
-		{
-			scanf("%d", &y);
-			printf("%lld\n", sumpath(x, y));
-		}
-		else if(op == 3)
-		{
-			scanf("%d", &z);
-			addtree(x, z);
-		}
-		else if(op == 4)
-		{
-			printf("%lld\n", sumtree(x));
-		}
-	}
+## [NOI2015] 软件包管理器
 
-	return 0;
-}
-```
-{% endnote %}
-$\color[rgb]{1,1,0.0625}{φ}$
+也是一道树剖的经典题目。
+
+我们仔细想一下就可以知道，`install`操作可以将从当前节点到根节点的所有未安装的软件全部安装，而`uninstall`会将其子树内的所有软件一并卸载。
+
+然后就是区间推平了。
+
+详细的解释可以看我的[题解](/solutions/solution-p2146/)。

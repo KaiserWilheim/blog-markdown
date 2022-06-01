@@ -129,7 +129,7 @@ def prefix_function(s):
 
 观察一下我们想要找到的东西：
 
-![kmp1.svg](/pics/kmp1.svg)
+<img src="/pics/kmp1.svg" alt="kmp1.svg" width="50%" />
 
 我们想要找到两个字符串 $s[0 \to j-1]$ 和 $s[i-j+1 \to i]$，他们完全相等，同时也分别是 $s[0 \to i]$ 的一个前缀和一个后缀。
 
@@ -197,75 +197,7 @@ def prefix_function(s):
 
 洛谷例题：https://www.luogu.com.cn/problem/P3375
 
-示例代码：
-
-``` cpp
-#include <bits/stdc++.h>
-using namespace std;
-vector<int> kmp(string s)
-{
-	int n = ( int )s.length();
-	vector<int> pi(n);
-	for(int i = 1; i < n; i++)
-	{
-		int j = pi[i - 1];
-		while(j > 0 && s[i] != s[j]) j = pi[j - 1];
-		if(s[i] == s[j]) j++;
-		pi[i] = j;
-	}
-	return pi;
-}
-int main()
-{
-	string s1, s2;
-	cin >> s2 >> s1;
-	string s3 = s1 + "#" + s2;
-	vector<int> pi1 = kmp(s3);
-	int n = s1.length();
-	int m = s2.length();
-	for(int i = n; i < s3.length(); i++)
-		if(pi1[i] == n)printf("%d\n", i - n - n + 1);
-	vector<int> pi2 = kmp(s1);
-	for(int i = 0; i < n; i++)printf("%d ", pi2[i]);
-	putchar('\n');
-	return 0;
-}
-```
-
-{% note default Python %}
-
-``` py
-def kmp(s):
-    n = len(s)
-    pi = [0] * n
-    for i in range(1, n):
-        j = pi[i - 1]
-        while j > 0 and s[i] != s[j]:
-            j = pi[j - 1]
-        if s[i] == s[j]:
-            j += 1
-        pi[i] = j
-    return pi
-
-s2 = input("")
-s1 = input("")
-n = len(s1)
-s3 = s1 + "#" + s2
-pi1 = kmp(s3)
-
-for i in range (n, len(s3)):
-    if pi1[i] == n:
-        print(i - 2 * n + 1)
-
-pi2 = kmp(s1)
-
-for i in range (0, n):
-    print(pi2[i], end=' ')
-
-print("")
-```
-
-{% endnote %}
+示例代码：[`Luogu P3375`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3375/p3375.cpp)
 
 # 应用
 
@@ -277,7 +209,7 @@ print("")
 
 就像这样：
 
-![kmp2.svg](/pics/kmp2.svg)
+<img src="/pics/kmp2.svg" alt="kmp2.svg" width="50%" />
 
 从这里我们可以得出 $s[0 \to 1]=s[2 \to 3]=s[4 \to 5]=s[6 \to 7]$，从而得出 $r-|s|=2$ 为 $s$ 的周期。
 
@@ -285,42 +217,4 @@ print("")
 
 AcWing例题：https://www.acwing.com/problem/content/143/
 
-{% note success 参考代码 %}
-``` cpp
-#include <bits/stdc++.h>
-using namespace std;
-#define ll long long
-vector<int> kmp(string s)
-{
-	int n = ( int )s.length();
-	vector<int> pi(n);
-	for(int i = 1; i < n; i++)
-	{
-		int j = pi[i - 1];
-		while(j > 0 && s[i] != s[j]) j = pi[j - 1];
-		if(s[i] == s[j]) j++;
-		pi[i] = j;
-	}
-	return pi;
-}
-int main()
-{
-	int n;
-	string s;
-	cin >> n;
-	int tot = 0;
-	while(n)
-	{
-		cin >> s;
-		vector<int>pi = kmp(s);
-		printf("Test case #%d\n", ++tot);
-		for(int i = 0; i < n; i++)
-			if(((i + 1) % (i - pi[i] + 1) == 0) && ((i + 1) != (i - pi[i] + 1)))
-				printf("%d %d\n", i + 1, (i + 1) / (i - pi[i] + 1));
-		putchar('\n');
-		cin >> n;
-	}
-	return 0;
-}
-```
-{% endnote %}
+参考代码：[`AcWing 141`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/AcWing/141/ac141.cpp)

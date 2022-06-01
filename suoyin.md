@@ -27,7 +27,7 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 如果某一个板子是我自己写的，在它的附近会有一个 $\color[rgb]{1,1,0.0625}{φ}$ 的标志。这些板子保证运行的正确性。大胆褐，不会有事的（指运行结果）。
 如果某一个板子不是我写的，在它的附近会有一个 $\blacktriangleright$ 指向它的出处。这些板子不保证运行的正确性。使用之前请斟酌。 
 
-最后一次维护：20220525
+最后一次维护：20220527
 
 # OI
 
@@ -63,9 +63,6 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [树链剖分](/OI/heavy-path-decomposition) $\color[rgb]{0,0.5,1}{\sharp}$
   树剖。
 
-- [点分治](/OI/point-divide) $\color[rgb]{0,0.5,1}{\sharp}$
-  点分治与点分树。
-
 - [差分约束](/OI/difference-constraint/) $\color[rgb]{0,0.5,1}{\sharp}$
   一种用来解决不等式组求解的算法。
 
@@ -94,9 +91,6 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 
 - [Trie与AC自动机](/OI/trie-and-AK-avtomat) $\color[rgb]{0,0.5,1}{\sharp}$
    Trie与AC自动机，同时包括可持久化Trie。
-  
-- [后缀数组](/OI/suffix-array) $\color[rgb]{0,0.5,1}{\sharp}$ 
-  如题，后缀数组。
 
 - [后缀自动机](/OI/suffix-avtomat) $\color[rgb]{0,0.5,1}{\sharp}$ 
   如题，后缀自动机。
@@ -120,11 +114,14 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [Luogu P1251](/solutions/solution-p1251) 餐巾计划问题
 - [Luogu P1486](/solutions/solution-p1486) [NOI2004] 郁闷的出纳员
 - [Luogu P1505](/solutions/solution-p1505) [国家集训队] 旅游
+- [Luogu P1712](/solutions/solution-p1712) [NOI2016] 区间
 - [Luogu P2042](/solutions/solution-p2042) [NOI2005] 维护数列
 - [Luogu P2146](/solutions/solution-p2146) 软件包管理器
 - [Luogu P2414](/solutions/solution-p2414) [NOI2011] 阿狸的打字机
+- [Luogu P2824](/solutions/solution-p2824) [HEOI2016/TJOI2016] 排序
 - [Luogu P3586](/solutions/solution-p3586) [POI2015] Logistyka
 - [Luogu P3644](/solutions/solution-p3644) [APIO2015] 巴邻旁之桥
+- [Luogu P3645](/solutions/solution-p3645) [APIO2015] 雅加达的摩天楼
 - [Luogu P4551](/solutions/solution-p4551) 最长异或路径
 - [Luogu P4643](/solutions/solution-p4643) [国家集训队] 阿狸和桃子的游戏
 
