@@ -8,12 +8,15 @@ categories:
 	题解
 mathjax: true
 ---
-
-Luogu P3586
-
-POI 2015
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">Logistyka</div>
+<div id="problem-info-from">POI 2015</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P3586">Luogu P3586</a></li></ul></div>
+
 ----
 
 # 思路

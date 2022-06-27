@@ -8,14 +8,15 @@ categories:
 	题解
 mathjax: true
 ---
+<br>
+<!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">优秀的拆分</div>
+<div id="problem-info-from">NOI 2016</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P1117">Luogu P1117</a></li><li><a href="https://loj.ac/p/2083">LibreOJ L2083</a></li><li><a href="https://www.acwing.com/problem/content/1008/">AcWing 1006</a></li><li><a href="https://uoj.ac/problem/219">UOJ #219</a></li></ul></div>
 
-Luogu P1117
-LibreOJ #2083
-UOJ #219
-
-NOI 2016
-
-<!--more-->
 ----
 
 {% note warning %}

@@ -8,13 +8,15 @@ categories:
 	题解
 mathjax: true
 ---
-
-Luogu P3644
-LibreOJ #2888
-
-APIO 2015
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">巴邻旁之桥</div>
+<div id="problem-info-from">APIO 2015</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P3644">Luogu P3644</a></li><li><a href="https://loj.ac/p/2888">LibreOJ L2888</a></li><li><a href="https://uoj.ac/problem/112">UOJ #112</a></li><li><a href="https://darkbzoj.cc/problem/4071">BZOJ #4071</a></li></ul></div>
+
 ----
 
 题目大意：

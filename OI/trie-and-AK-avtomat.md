@@ -14,6 +14,8 @@ Trie树（字典树）与AC自动机。
 
 <!-- more -->
 
+<div id="problem-card-vis">false</div>
+
 # Trie
 
 Trie树，又称字典树，是一种数据结构。

@@ -13,6 +13,8 @@ KMP算法与前缀函数。
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 简介
 
 KMP算法，全称为 Knuth-Morris-Pratt 算法，是由 Knuth, Morris 和 Pratt 这三个人创造的算法，可以在 $O(n+m)$ 的时间内使用 $O(n)$ 的空间完成如下的任务：
@@ -129,7 +131,7 @@ def prefix_function(s):
 
 观察一下我们想要找到的东西：
 
-<img src="/pics/kmp1.svg" alt="kmp1.svg" width="50%" />
+<img src="/pics/kmp1.png" width="50%" />
 
 我们想要找到两个字符串 $s[0 \to j-1]$ 和 $s[i-j+1 \to i]$，他们完全相等，同时也分别是 $s[0 \to i]$ 的一个前缀和一个后缀。
 
@@ -184,7 +186,7 @@ def prefix_function(s):
 
 现在终于来到了KMP算法的本体部分。
 
-我们考虑根据题目给定的 $S$ 和 $T$ 两个字符串，拼接成一个新的字符串 $S+ \sharp +T$ ，其中 $\sharp$ 代表在 $S$ 和 $T$ 中都没有出现过的分隔符。
+我们考虑根据题目给定的 $S$ 和 $T$ 两个字符串，拼接成一个新的字符串 $S+ \\# +T$ ，其中 $\\#$ 代表在 $S$ 和 $T$ 中都没有出现过的分隔符。
 
 我们考虑计算新字符串 $T$ 部分的Next函数。
 

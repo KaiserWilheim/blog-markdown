@@ -1,6 +1,5 @@
 ---
 title: 特殊的数
-zh-CN: true
 date: 2022-03-17
 tags:
 - 数学
@@ -12,6 +11,8 @@ mathjax: true
 简介： 卡特兰数，斯特林数，欧拉数，调和级数
 
 <!--more-->
+
+<div id="problem-card-vis">false</div>
 
 # 卡特兰数(Catalan Numbers)
 

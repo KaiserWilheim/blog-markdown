@@ -9,6 +9,8 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 引子
 
 $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
@@ -110,6 +112,10 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 
 题解还会有没写完的吗？
 
+给自己看的：
+注意提交地址顺序：
+Luogu LibreOJ AcWing UOJ BZOJ
+
 - [Luogu P1117](/solutions/solution-p1117) [NOI2016] 优秀的拆分
 - [Luogu P1251](/solutions/solution-p1251) 餐巾计划问题
 - [Luogu P1486](/solutions/solution-p1486) [NOI2004] 郁闷的出纳员
@@ -119,11 +125,14 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [Luogu P2146](/solutions/solution-p2146) 软件包管理器
 - [Luogu P2414](/solutions/solution-p2414) [NOI2011] 阿狸的打字机
 - [Luogu P2824](/solutions/solution-p2824) [HEOI2016/TJOI2016] 排序
+- [Luogu P2860](/solutions/solution-p2860) [USACO06JAN] Redundant Paths G
+- [Luogu P2906](/solutions/solution-p2906) [USACO08OPEN] Cow Neighborhoods G
+- [Luogu P3574](/solutions/solution-p3574) [POI2014] FAR-FarmCraft
 - [Luogu P3586](/solutions/solution-p3586) [POI2015] Logistyka
 - [Luogu P3644](/solutions/solution-p3644) [APIO2015] 巴邻旁之桥
 - [Luogu P3645](/solutions/solution-p3645) [APIO2015] 雅加达的摩天楼
-- [Luogu P4551](/solutions/solution-p4551) 最长异或路径
 - [Luogu P4643](/solutions/solution-p4643) [国家集训队] 阿狸和桃子的游戏
+- [Luogu P5290](/solutions/solution-p5290) [十二省联考 2019] 春节十二响
 
 + [LibreOJ #2759](/solutions/solution-l2759) 蜜袋鼯（フクロモモンガ）
 + [LibreOJ #2980](/solutions/solution-l2980) 「THUSCH 2017」 大魔法师

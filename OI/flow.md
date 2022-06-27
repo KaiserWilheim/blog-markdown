@@ -1,7 +1,7 @@
 ---
 title: 网络流
 zh-CN: true
-date: 2022-02-28
+date: 2022-06-23
 tags:
 	- 算法
 	- 图论
@@ -14,7 +14,10 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 （3-13至3-14重修）
+（6-23至6-24增添上下界网络流相关内容）
 
 # 什么是网络流
 
@@ -121,7 +124,7 @@ $$
 EK 算法的时间复杂度为 $O(nm^2)$（其中 $n$ 为点数，$m$ 为边数）。
 其效率还有很大提升空间，但实际情况下不一定能跑满，应付 $10^3 \sim 10^4$ 大小的图应该足够了。
 
-参考代码：
+{% note success 参考代码 %}
 
 ``` cpp
 #include<bits/stdc++.h>
@@ -188,6 +191,7 @@ int main()
 	return 0;
 }
 ```
+{% endnote %}
 
 ### Dinic 算法
 
@@ -215,43 +219,7 @@ Dinic 算法的时间复杂度是 $O(n^2m)$ 级别的，但实际上其实跑不
 Dinic算法可以说是算法实现难易程度与时间复杂度较为平衡的一个算法，可以应对 $10^4 \sim 10^5$级别的图。
 特别的，Dinic算法在求解二分图最大匹配问题的时候的时间复杂度是 $O(m\sqrt{n})$ 级别的，实际情况下则比这更优。
 
-{% note info 时间复杂度证明 %}
-
-搬自 OI-Wiki
-
-#### 时间复杂度
-
-设点数为 $n$，边数为 $m$，那么 Dinic 算法的时间复杂度（在应用上面两个优化的前提下）是 $O(n^2m)$，在稀疏图上效率和 EK 算法相当，但在稠密图上效率要比 EK 算法高很多。
-
-首先考虑单轮增广的过程。在应用了**当前弧优化**的前提下，对于每个点，我们维护下一条可以增广的边，而当前弧最多变化 $m$ 次，从而单轮增广的最坏时间复杂度为 $O(nm)$。
-
-接下来我们证明，最多只需 $n-1$ 轮增广即可得到最大流。
-
-我们先回顾下 Dinic 的增广过程。对于每个点，Dinic 只会找比该点层数多 $1$ 的点进行增广。
-
-首先容易发现，对于图上的每个点，一轮增广后其层数一定不会减小。而对于汇点 $t$，情况会特殊一些，其层数在一轮增广后一定增大。
-
-对于后者，我们考虑用反证法证明。如果 $t$ 的层数在一轮增广后不变，则意味着在上一次增广中，仍然存在着一条从 $s$ 到 $t$ 的增广路，且该增广路上相邻两点间的层数差为 $1$。这条增广路应该在上一次增广过程中就被增广了，这就出现了矛盾。
-
-从而我们证明了汇点的层数在一轮增广后一定增大，即增广过程最多进行 $n-1$ 次。
-
-综上 Dinic 的最坏时间复杂度为 $O(n^{2}m)$。事实上在一般的网络上，Dinic 算法往往达不到这个上界。
-
-特别地，在求解二分图最大匹配问题时，Dinic 算法的时间复杂度是 $O(m\sqrt{n})$。接下来我们将给出证明。
-
-首先我们来简单归纳下求解二分图最大匹配问题时，建立的网络的特点。我们发现这个网络中，所有边的流量均为 $1$，且除了源点和汇点外的所有点，都满足入边最多只有一条，或出边最多只有一条。我们称这样的网络为**单位网络**。
-
-对于单位网络，一轮增广的时间复杂度为 $O(m)$，因为每条边只会被考虑最多一次。
-
-接下来我们试着求出增广轮数的上界。假设我们已经先完成了前 $\sqrt{n}$ 轮增广，因为汇点的层数在每次增广后均严格增加，因此所有长度不超过 $\sqrt{n}$ 的增广路都已经在之前的增广过程中被增广。设前 $\sqrt{n}$ 轮增广后，网络的流量为 $f$，而整个网络的最大流为 $f'$，设两者间的差值 $d=f'-f$。
-
-因为网络上所有边的流量均为 $1$，所以我们还需要找到 $d$ 条增广路才能找到网络最大流。又因为单位网络的特点，这些增广路不会在源点和汇点以外的点相交。因此这些增广路至少经过了 $d\sqrt{n}$ 个点（每条增广路的长度至少为 $\sqrt{n}$），且不能超过 $n$ 个点。因此残量网络上最多还存在 $\sqrt{n}$ 条增广路。也即最多还需增广 $\sqrt{n}$ 轮。
-
-综上，对于包含二分图最大匹配在内的单位网络，Dinic 算法可以在 $O(m\sqrt{n})$ 的时间内求出其最大流。
-
-{% endnote %}
-
-参考代码：
+{% note success 参考代码 %}
 
 ``` cpp
 #include<bits/stdc++.h>
@@ -274,16 +242,16 @@ bool bfs()
 	q[0] = S, d[S] = 0, cur[S] = h[S];
 	while(hh <= tt)
 	{
-		int t = q[hh++];
-		for(int i = h[t]; ~i; i = ne[i])
+		int u = q[hh++];
+		for(int i = h[u]; ~i; i = ne[i])
 		{
-			int ver = e[i];
-			if(d[ver] == -1 && f[i])
+			int v = e[i];
+			if(d[v] == -1 && f[i])
 			{
-				d[ver] = d[t] + 1;
-				cur[ver] = h[ver];
-				if(ver == T)  return true;
-				q[++tt] = ver;
+				d[v] = d[u] + 1;
+				cur[v] = h[v];
+				if(v == T)return true;
+				q[++tt] = v;
 			}
 		}
 	}
@@ -292,17 +260,18 @@ bool bfs()
 
 int find(int u, int limit)
 {
-	if(u == T) return limit;
+	if(u == T)return limit;
 	int flow = 0;
 	for(int i = cur[u]; ~i && flow < limit; i = ne[i])
 	{
-		cur[u] = i;  // 当前弧优化
-		int ver = e[i];
-		if(d[ver] == d[u] + 1 && f[i])
+		cur[u] = i;//当前弧优化
+		int v = e[i];
+		if(d[v] == d[u] + 1 && f[i])
 		{
-			int t = find(ver, min(f[i], limit - flow));
-			if(!t) d[ver] = -1;
-			f[i] -= t, f[i ^ 1] += t, flow += t;
+			int t = find(v, min(f[i], limit - flow));
+			if(!t)d[v] = -1;
+			f[i] -= t, f[i ^ 1] += t;
+			flow += t;
 		}
 	}
 	return flow;
@@ -329,6 +298,7 @@ int main()
 	return 0;
 }
 ```
+{% endnote %}
 
 # 最小割
 
@@ -378,25 +348,6 @@ SSP（Successive Shortest Path）算法是一个贪心的算法。它的思路�
 
 如果图上存在单位费用为负的圈，SSP 算法正确无法求出该网络的最小费用最大流。此时需要先使用消圈算法消去图上的负圈。
 
-{% note info 证明 %}
-
-搬自 OI-Wiki
-
-### 证明
-
-我们考虑使用数学归纳法和反证法来证明 SSP 算法的正确性。
-
-设流量为 $i$ 的时候最小费用为 $f_i$。我们假设最初的网络上 **没有负圈**，这种情况下 $f_0=0$。
-
-假设用 SSP 算法求出的 $f_i$ 是最小费用，我们在 $f_i$ 的基础上，找到一条最短的增广路，从而求出 $f_{i+1}$。这时 $f_{i+1}-f_i$ 是这条最短增广路的长度。
-
-假设存在更小的 $f_{i+1}$，设它为 $f_{i+1}'$。因为 $f_{i+1}-f_i$ 已经是最短增广路了，所以 $f_{i+1}'-f_i$ 一定对应一个经过 **至少一个负圈** 的增广路。
-
-这时候矛盾就出现了：既然存在一条经过至少一个负圈的增广路，那么 $f_i$ 就不是最小费用了。因为只要给这个负圈添加流量，就可以在不增加 $s$ 流出的流量的前提下，使 $f_i$ 对应的费用更小。
-
-综上，SSP 算法可以正确求出无负圈网络的最小费用最大流。
-
-{% endnote %}
 
 ### 时间复杂度
 
@@ -406,7 +357,11 @@ SSP（Successive Shortest Path）算法是一个贪心的算法。它的思路�
 
 只需将 EK 算法或 Dinic 算法中找增广路的过程，替换为用最短路算法寻找单位费用最小的增广路即可。
 
-基于EK算法的实现：
+这里写的是SPFA，因为怕有负边权导致的奇怪的结果。
+
+当然，如果没有负权的话可以使用dijkstra。
+
+{% note info 基于EK算法的实现 %}
 
 ``` cpp
 #include<bits/stdc++.h>
@@ -487,8 +442,9 @@ int main()
 	return 0;
 }
 ```
+{% endnote %}
 
-基于 Dinic 算法的实现：
+{% note info 基于 Dinic 算法的实现 %}
 
 ``` cpp
 #include<bits/stdc++.h>
@@ -586,228 +542,355 @@ int main()
 
 ```
 （貌似寄了，求调）
+{% endnote %}
 
-# 常见技巧
+# 上下界网络流
 
-## 拆点
+现在我们每一条边不仅有流量的上界了，还有了流量的下界。
 
-我们经常需要应对一些对点的访问次数或者流量上限有限制的题目。
+## 无源汇有上下界可行流
 
-或者我们有时候需要处理多类点的匹配问题，例如[某一个USACO的题目](https://www.luogu.com.cn/problem/P2891)。
+现在我们手里拿到了一张图，上面没有给定源点和汇点，同时每一条边都有流量的上界和下界。
+现在我们需要求出来一个方案，使得我们这张图的所有点满足流量平衡（即每一个点流出的流量和流入的流量是相等的），同时满足流量限制。
 
-对于这种问题，我们可以把一个点拆成两个点，并用一条边连接这两个点。
+例题就是LibreOJ的[#115. 无源汇有上下界可行流](https://loj.ac/p/115)。
 
-如果我们对点的最大流量有限制，那么我们就可以将这条边的流量设置为原图中对应的点的最大流量。
+我们的思路如下：
 
-如果我们走过点的时候有费用，那么我们就把费用加到边上。
+我们可以将我们的一个可行方案拆成两部分，为每一条边的下限加上超出每一条边下限的部分。
+我们称超出每一条边下限的这部分流叫做附加流。
 
-等等等等。
+首先我们跑满所有边的下限，记录下每一个点流入流量与流出流量之差，设其为 $A_i$。
 
-以刚才我们提到的题目为例。
+根据上面我们得到的信息，我们在建立一个新图，是正常的不带下界的网络流，并新建两个源汇点 $S$ 与 $T$。这张图里面的边与原先起始点一样，而流量变为了原边的上界减去下界。
 
-这道题要求我们将食物、饮料与牛进行配对。
-为了防止一头牛吃两顿饭，我们将代表牛的点拆成两个，中间连接一条容量为1的边，代表这个点只能被访问一次。
+因为部分点的流量不是平衡的，我们需要让其在加上附加流之后平衡，同时在求附加流的这个图中也需要保证流量平衡，所以我们需要将每一个点中不平衡的流量给到源点或汇点。
 
-代码：
+对于 $A_i > 0$ 的，说明这个点流入较多，需要往出流，其附加流的流出流量是大于其流入流量的，所以需要从 $S$ 向其连一条流量为 $A_i$ 的边；
+对于 $A_i < 0$ 的，说明这个点流出较多，需要再流入，其附加流的流入流量是大于其流出流量的，所以需要从其向 $T$ 连一条流量为 $-A_i$ 的边。
+
+我们对这个新图跑一个最大流，然后看起最大流量是否等于 $S$ 的所有出边流量之和。如果相等，那么原图也就流量平衡了，这时候我们就得到了一个可行的方案。
+
+{% note success 参考代码 %}
 
 ``` cpp
 #include<bits/stdc++.h>
+#define ll long long
 using namespace std;
-const int N = 510, M = 200010, INF = 1e8;
-int n, f, d;
-int h[N], e[M], c[M], ne[M], idx;
-int num[N];
-int minn, s, t, minflow, maxflow, tot;
-queue<int>q;
-
-void add(int u, int v, int a)
+const int N = 100010, M = 200010;
+const int INF = 1e9;
+int m, n;
+int S, T;
+int h[N], e[M], ne[M], f[M], l[M], idx;
+int A[N];
+int q[N], d[N], cur[N];
+void add(int a, int b, int c, int d)
 {
-	e[++idx] = v, c[idx] = a, ne[idx] = h[u], h[u] = idx;
-	e[++idx] = u, c[idx] = 0, ne[idx] = h[v], h[v] = idx;
+	e[idx] = b, ne[idx] = h[a], f[idx] = d - c, l[idx] = c, h[a] = idx++;
+	e[idx] = a, ne[idx] = h[b], f[idx] = 0, h[b] = idx++;
 }
-
-bool add_num()
+bool bfs()
 {
-	while(!q.empty())q.pop();
-	for(int i = s; i <= t + n; i++)num[i] = -1;
-	num[s] = 1;
-	q.push(s);
-	while(!q.empty())
+	int hh = 0, tt = 0;
+	memset(d, -1, sizeof(d));
+	q[0] = S, d[S] = 0, cur[S] = h[S];
+	while(hh <= tt)
 	{
-		int now = q.front();
-		q.pop();
-		for(int i = h[now]; i; i = ne[i])
+		int u = q[hh++];
+		for(int i = h[u]; ~i; i = ne[i])
 		{
-			if(c[i] && num[e[i]] == -1)
+			int v = e[i];
+			if(d[v] == -1 && f[i])
 			{
-				num[e[i]] = num[now] + 1;
-				q.push(e[i]);
+				d[v] = d[u] + 1;
+				cur[v] = h[v];
+				if(v == T)return true;
+				q[++tt] = v;
 			}
 		}
 	}
-	if(num[t] == -1)return false;
-	else return true;
+	return false;
 }
-
-int dfs(int u, int s)
+int find(int u, int limit)
 {
-	if(u == t)
+	if(u == T)return limit;
+	int flow = 0;
+	for(int i = cur[u]; ~i && flow < limit; i = ne[i])
 	{
-		return s;
-	}
-	for(int i = h[u]; i; i = ne[i])
-	{
-		if(c[i] && num[u] + 1 == num[e[i]] && (minflow = dfs(e[i], min(s, c[i]))))
+		cur[u] = i;
+		int v = e[i];
+		if(d[v] == d[u] + 1 && f[i])
 		{
-			c[i] -= minflow;
-			c[i ^ 1] += minflow;
-			return minflow;
+			int t = find(v, min(f[i], limit - flow));
+			if(!t)d[v] = -1;
+			f[i] -= t, f[i ^ 1] += t;
+			flow += t;
 		}
 	}
-	return 0;
+	return flow;
 }
-
-void dinic()
+int dinic()
 {
-	while(add_num())
-		while((minn = dfs(1, INF)))
-			maxflow += minn;
+	int r = 0, flow;
+	while(bfs())while(flow = find(S, INF))r += flow;
+	return r;
 }
-
 int main()
 {
-	scanf("%d%d%d", &n, &f, &d);
-	idx = 1;
-	s = 1;
-	t = 1 + f + n + d + 1;
-	for(int i = 1; i <= f; i++)add(s, 1 + i, 1);
-	for(int i = 1; i <= d; i++)add(1 + f + n + i, t, 1);
-	for(int i = 1; i <= n; i++)add(1 + f + i, 1 + f + n + d + 1 + i, 1);
+	memset(h, -1, sizeof(h));
+	scanf("%d%d", &n, &m);
+	S = 0, T = n + 1;
+	for(int i = 1; i <= m; i++)
+	{
+		int a, b, c, d;
+		scanf("%d%d%d%d", &a, &b, &c, &d);
+		add(a, b, c, d);
+		A[a] -= c, A[b] += c;
+	}
+	int tot = 0;
 	for(int i = 1; i <= n; i++)
 	{
-		int dn, fn;
-		scanf("%d%d", &fn, &dn);
-		for(int q = 1; q <= fn; q++)
+		if(A[i] > 0)
 		{
-			int fi;
-			scanf("%d", &fi);
-			add(1 + fi, 1 + f + i, 1);
+			add(S, i, 0, A[i]);
+			tot += A[i];
 		}
-		for(int q = 1; q <= dn; q++)
+		else if(A[i] < 0)
 		{
-			int di;
-			scanf("%d", &di);
-			add(1 + f + n + d + 1 + i, 1 + f + n + di, 1);
+			add(i, T, 0, -A[i]);
 		}
 	}
-	dinic();
-	printf("%d\n", maxflow);
+	int res = dinic();
+	if(res != tot)puts("NO");
+	else
+	{
+		puts("YES");
+		for(int i = 0; i < m * 2; i += 2)
+			printf("%d\n", f[i ^ 1] + l[i]);
+	}
 	return 0;
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% endnote %}
+
+## 有源汇有上下界最大/最小流
+
+我们知道，在一个图中要能够跑出一个可行流的前提是所有点都需要流量平衡，但是我们的源点和汇点都没有流量平衡，这就很难办。
+
+一个可以想到的方法就是，从汇点向源点连接一条容量为无限的边，这样就可以跑出来一个可行流。
+
+我们再从给定的源点到汇点再跑一个最大流，将其加到我们的可行流上面就是我们的最大流了；
+如果想要求最小流的话，就可以从汇点到源点跑一个残量网络上的最大流，代表着我们可以将这些流回退掉，从可行流里面减去当前的最大流就是最小流了。
+
+例题分别是LibreOJ的[#116. 有源汇有上下界最大流](https://loj.ac/p/116)和[#117. 有源汇有上下界最小流](https://loj.ac/p/117)。
+
+{% note success 最大流 参考代码 %}
+``` cpp
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int N = 100010, M = 200010;
+const int INF = 1e9;
+int m, n;
+int S, T, s, t;
+int h[N], e[M], ne[M], f[M], l[M], idx;
+int A[N];
+int q[N], d[N], cur[N];
+void add(int a, int b, int c, int d)
+{
+	e[idx] = b, ne[idx] = h[a], f[idx] = d - c, l[idx] = c, h[a] = idx++;
+	e[idx] = a, ne[idx] = h[b], f[idx] = 0, h[b] = idx++;
+}
+bool bfs()
+{
+	int hh = 0, tt = 0;
+	memset(d, -1, sizeof(d));
+	q[0] = S, d[S] = 0, cur[S] = h[S];
+	while(hh <= tt)
+	{
+		int u = q[hh++];
+		for(int i = h[u]; ~i; i = ne[i])
+		{
+			int v = e[i];
+			if(d[v] == -1 && f[i])
+			{
+				d[v] = d[u] + 1;
+				cur[v] = h[v];
+				if(v == T)return true;
+				q[++tt] = v;
+			}
+		}
+	}
+	return false;
+}
+int find(int u, int limit)
+{
+	if(u == T)return limit;
+	int flow = 0;
+	for(int i = cur[u]; ~i && flow < limit; i = ne[i])
+	{
+		cur[u] = i;
+		int v = e[i];
+		if(d[v] == d[u] + 1 && f[i])
+		{
+			int t = find(v, min(f[i], limit - flow));
+			if(!t)d[v] = -1;
+			f[i] -= t, f[i ^ 1] += t;
+			flow += t;
+		}
+	}
+	return flow;
+}
+int dinic()
+{
+	int r = 0, flow;
+	while(bfs())while(flow = find(S, INF))r += flow;
+	return r;
+}
+int main()
+{
+	memset(h, -1, sizeof(h));
+	scanf("%d%d", &n, &m);
+	scanf("%d%d", &s, &t);
+	S = 0, T = n + 1;
+	for(int i = 1; i <= m; i++)
+	{
+		int a, b, c, d;
+		scanf("%d%d%d%d", &a, &b, &c, &d);
+		add(a, b, c, d);
+		A[a] -= c, A[b] += c;
+	}
+	int tot = 0;
+	for(int i = 1; i <= n; i++)
+	{
+		if(A[i] > 0)
+		{
+			add(S, i, 0, A[i]);
+			tot += A[i];
+		}
+		else if(A[i] < 0)
+		{
+			add(i, T, 0, -A[i]);
+		}
+	}
+	add(t, s, 0, INF);
+	int res = dinic();
+	if(res != tot)puts("please go home to sleep");
+	else
+	{
+		res = f[idx - 1];
+		f[idx - 1] = f[idx - 2] = 0;
+		S = s, T = t;
+		int ans = res + dinic();
+		printf("%d\n", ans);
+	}
+	return 0;
+}
+```
+{% endnote %}
+
+{% note success 最小流 参考代码 %}
+``` cpp
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int N = 100010, M = 400010;
+const int INF = 1e9;
+int m, n;
+int S, T, s, t;
+int h[N], e[M], ne[M], f[M], l[M], idx;
+int A[N];
+int q[N], d[N], cur[N];
+void add(int a, int b, int c, int d)
+{
+	e[idx] = b, ne[idx] = h[a], f[idx] = d - c, l[idx] = c, h[a] = idx++;
+	e[idx] = a, ne[idx] = h[b], f[idx] = 0, h[b] = idx++;
+}
+bool bfs()
+{
+	int hh = 0, tt = 0;
+	memset(d, -1, sizeof(d));
+	q[0] = S, d[S] = 0, cur[S] = h[S];
+	while(hh <= tt)
+	{
+		int u = q[hh++];
+		for(int i = h[u]; ~i; i = ne[i])
+		{
+			int v = e[i];
+			if(d[v] == -1 && f[i])
+			{
+				d[v] = d[u] + 1;
+				cur[v] = h[v];
+				if(v == T)return true;
+				q[++tt] = v;
+			}
+		}
+	}
+	return false;
+}
+int find(int u, int limit)
+{
+	if(u == T)return limit;
+	int flow = 0;
+	for(int i = cur[u]; ~i && flow < limit; i = ne[i])
+	{
+		cur[u] = i;
+		int v = e[i];
+		if(d[v] == d[u] + 1 && f[i])
+		{
+			int t = find(v, min(f[i], limit - flow));
+			if(!t)d[v] = -1;
+			f[i] -= t, f[i ^ 1] += t;
+			flow += t;
+		}
+	}
+	return flow;
+}
+int dinic()
+{
+	int r = 0, flow;
+	while(bfs())while(flow = find(S, INF))r += flow;
+	return r;
+}
+int main()
+{
+	memset(h, -1, sizeof(h));
+	scanf("%d%d", &n, &m);
+	scanf("%d%d", &s, &t);
+	S = 0, T = n + 1;
+	for(int i = 1; i <= m; i++)
+	{
+		int a, b, c, d;
+		scanf("%d%d%d%d", &a, &b, &c, &d);
+		add(a, b, c, d);
+		A[a] -= c, A[b] += c;
+	}
+	int tot = 0;
+	for(int i = 1; i <= n; i++)
+	{
+		if(A[i] > 0)
+		{
+			add(S, i, 0, A[i]);
+			tot += A[i];
+		}
+		else if(A[i] < 0)
+		{
+			add(i, T, 0, -A[i]);
+		}
+	}
+	add(t, s, 0, INF);
+	int res = dinic();
+	if(res != tot)puts("please go home to sleep");
+	else
+	{
+		res = f[idx - 1];
+		f[idx - 1] = f[idx - 2] = 0;
+		S = t, T = s;
+		int ans = res - dinic();
+		printf("%d\n", ans);
+	}
+	return 0;
+}
+```
+{% endnote %}
 

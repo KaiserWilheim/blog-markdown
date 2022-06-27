@@ -12,6 +12,11 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
+2022-03-30发布，
+2022-06-03再修。
+
 我们经常会遇到一些问题，就是给出一堆未知量，再给出一堆类似“某一个未知量比另一个未知量最多（最少）大（小）多少”的问题，让我们从这一团繁杂的毛钱中拎出一根线头来，以求得这个毛线团的一组可行解。
 
 比如说下面这个东西：
@@ -36,7 +41,7 @@ $$
 
 回忆我们学习最短路的时候学到的知识。
 
-假设对于两个点 $a$ 和 $b$，如果其间有一条边长为 $w$ 的有向边 $a \to b$，那么它们的 $dis$ 一定满足 $dis[b] \leq dis[b] + w$。
+假设对于两个点 $a$ 和 $b$，如果其间有一条边长为 $w$ 的有向边 $a \to b$，那么它们的 $dis$ 一定满足 $dis[b] \leq dis[a] + w$。
 
 我们如果将每一个未知量 $x_k$ 与每一个点的 $dis[i]$ 联系起来的话，那么我们就可以得到形如 $x_b \leq x_a + w$ 的一堆不等式。
 
@@ -115,9 +120,15 @@ SPFA！
 
 # 例题
 
+其实差分约束最难的地方不是跑最短路求解的过程，而是如何去建这个图。
+
+这样子的话其实是与网络流有些类似的情况的，有时候我们没有很好的办法来把我们题目中给出的信息来转化成为我们的建图方式。
+
+下面首先会放上两道比较简单的、朴素的题目，没有什么太难理解的地方；然后就会放一些转化题意的例子。
+
 ## Luogu P1993 小 K 的农场
 
-题目链接：https://www.luogu.com.cn/problem/P1993
+题目链接：[Luogu](https://www.luogu.com.cn/problem/P1993)
 
 接近板子题。
 
@@ -125,28 +136,52 @@ SPFA！
 
 参考代码：[`Luogu P1993`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p1000-p1999/p1993/p1993.cpp)
 
-## Luogu P6145 [USACO20FEB] Timeline G
-
-题目链接：https://www.luogu.com.cn/problem/P6145
-
-由于保证有解，而且我们得到的约束条件又都形如“第 $b$ 次挤奶在第 $a$ 次挤奶结束至少 $x$ 天后进行”，所以我们得到的都是负权边。
-
-我们可以进行 dp，也可以跑最短路。
-
-参考代码：[`Luogu P6145`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p6000+/p6145/p6145.cpp)
-
 ## Luogu P3275 [SCOI2011] 糖果
 
-题目链接：https://www.luogu.com.cn/problem/P3275
+题目链接：[Luogu](https://www.luogu.com.cn/problem/P3275) || [AcWing](https://www.acwing.com/problem/content/1171/) || [LibreOJ](https://loj.ac/p/2436)
 
 我们遇到了新的约束条件：不带取等的不等式。
 
 我们看一下题目的条件：**分糖果**。
 
-由于糖果是一块一块的，我们不能分给小朋友们半块糖果或 $\lim_{m \to 0}$ 块糖果，所以我们可以尝试着更改一下约束条件。
+由于糖果是一块一块的，我们不能分给小朋友们半块糖果或 $\lim\limits_{m \to 0}$ 块糖果，所以我们可以尝试着更改一下约束条件。
 我们可以将 $x_a > x_b$ 改为 $x_a \geq x_b + 1$。
 
 这样就可以建图了。
 
 参考代码：[`Luogu P3275`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3275/p3275.cpp)
+
+## AcWing 362. 区间
+
+题目链接：[AcWing](https://www.acwing.com/problem/content/364/) || [LibreOJ](https://loj.ac/p/10087)
+
+这一次题目没有直接给出类似于“A大于等于B+C"这样的条件，我们需要自己推出不等式组。
+
+首先我们需要了解我们维护的是一个不可重的集合，那么集合内的每一个数最多只能出现一次。
+
+然后我们需要满足的条件是区间内的数字的个数不小于 $c_i$ 个。
+
+然后我们会发现，我们可以将上述两个条件转化为前缀和数组中的不等关系。
+
+因为我们每一个数只能出现0次或1次，所以我们前缀和数组是严格非降的，且相邻两项之间最多差1。
+我们如果称前缀和数组为 $s$ 的话，那么上述条件可以转化为 $s_{i-1} \leq s_i$ 和 $s_i \leq s_{i-1} + 1$ 两个不等式。
+
+对于第二个条件，也可以转化成为前缀和数组上的不等关系。
+如果我们有一个条件是“$\[ a,b \]$ 这段区间内的数字不少于 $c$ 个”的话，我们可以将其转化为类似 $s_b \geq s_{a-1} + c$ 这样的不等式。
+
+然后我们就可以愉快地跑SPFA了，最后需要输出的是前缀和数组的最后一位——$s_{50001}$。
+
+参考代码：[`AcWing 362`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/AcWing/362/ac362.cpp)
+
+## Luogu P4878 [USACO05DEC] Layout G
+
+题目链接：[Luogu](https://www.luogu.com.cn/problem/P4878) || [AcWing](https://www.acwing.com/problem/content/1172/) || [LibreOJ](https://loj.ac/p/10090)
+
+题目保证了奶牛的编号与其在序列中的位置是相对应的，同时两个奶牛之间的距离可以是0，也就是说我们每一个奶牛的坐标一定大于等于其上一只的坐标。
+
+然后还有两种其他的条件，一是两头奶牛之间的距离不大于某个数，二是两头奶牛之间的距离不小于某个数。假设我们这两头奶牛分别是a和b，这个给定的数是c，那么我们对于上面两个条件分别可以得出 $x_b \leq x_a + c$ 和 $x_b \geq x_a + c$ 这两个不等式。
+
+然后就建图跑就可以了。
+
+参考代码：[`Luogu P4878`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p4000-p4999/p4878/p4878.cpp)
 

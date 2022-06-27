@@ -8,10 +8,15 @@ categories:
 	- 题解
 mathjax: true
 ---
-
-Luogu P4643
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">阿狸和桃子的游戏</div>
+<div id="problem-info-from">国家集训队</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P4643">Luogu P4643</a></li></ul></div>
+
 ----
 
 题目大意是，我们需要从一个带有边权和点权的图上对点进行染色，并按照一个特定的规则计分，最终输出两人得分之差，要求差最大。

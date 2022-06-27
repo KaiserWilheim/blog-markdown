@@ -14,6 +14,8 @@ Luogu P3384
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 引言
 
 树链剖分（简称“树剖”，又称“重链剖分”）是一种将一棵树转化为一段连续的区间的方法。

@@ -1,6 +1,5 @@
 ---
 title: 欧拉和莫比乌斯
-zh-CN: true
 date: 2022-02-07
 tags:
 - 数学
@@ -12,6 +11,8 @@ mathjax: true
 简介：欧拉定理，欧拉函数和莫比乌斯函数
 
 <!--more-->
+
+<div id="problem-card-vis">false</div>
 
 初稿写于2021-10-10，
 再修改于2022-02-07

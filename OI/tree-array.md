@@ -13,6 +13,8 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 树状数组
 
 一种神奇的数据结构。

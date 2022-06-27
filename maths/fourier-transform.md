@@ -13,6 +13,8 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 引入
 
 今天AJ给大家留了一个作业：

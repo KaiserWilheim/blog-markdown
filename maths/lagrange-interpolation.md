@@ -1,6 +1,5 @@
 ---
 title: 拉格朗日插值
-zh-CN: true
 date: 2022-03-17
 tags:
 	- 数学
@@ -12,6 +11,8 @@ mathjax: true
 拉格朗日插值。
 
 <!--more-->
+
+<div id="problem-card-vis">false</div>
 
 在学完函数以后，AJ想让我们求出一个函数，使得其带入自然数时生成的序列时给定的，并让武嘉给出了一个数列。
 

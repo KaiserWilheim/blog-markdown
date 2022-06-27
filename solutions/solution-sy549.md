@@ -8,10 +8,16 @@ categories:
 	题解
 mathjax: true
 ---
-
-http://192.168.0.111:1926/problem/549
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">农夫奶牛的约翰们</div>
+<div id="problem-info-from">none</div>
+<div id="problem-info-difficulty">none</div>
+<div id="problem-info-color"></div>
+<div id="problem-info-submit"><ul><li><a href="http://192.168.0.111:1926/problem/549">SEZSY OJ #549</a></li></ul></div>
+
+----
 
 # 题意转化
 

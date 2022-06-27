@@ -14,6 +14,8 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 首先展示 Note 框，以便使用：
 
 {% note Without Class %}

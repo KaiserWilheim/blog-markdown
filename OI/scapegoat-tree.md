@@ -13,6 +13,8 @@ mathjax: true
 
 <!-- more -->
 
+<div id="problem-card-vis">false</div>
+
 替罪羊树是一种平衡树。
 
 # 热身
@@ -146,7 +148,7 @@ bool canrbu(int p)
 一句话版：
 
 ``` cpp
-bool CanRbu(int k)
+bool canrbu(int k)
 {
 	return tr[k].wn && (alpha * tr[k].s <= ( double )max(tr[tr[k].ls].s, tr[tr[k].rs].s) || ( double )tr[k].sd <= alpha * tr[k].s);
 }//can rebuild

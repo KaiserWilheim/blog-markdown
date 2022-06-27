@@ -8,13 +8,15 @@ categories:
 	题解
 mathjax: true
 ---
+<br>
+<!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">郁闷的出纳员</div>
+<div id="problem-info-from">NOI 2004</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P1486">Luogu P1486</a></li><li><a href="https://loj.ac/p/10145">LibreOJ L10145</a></li><li><a href="https://www.acwing.com/problem/content/950/">AcWing 950</a></li></ul></div>
 
-Luogu P1486
-LibreOJ #10145
-
-NOI 2004
-
-<!--more-->
 ----
 
 这道题要求我们完成两个操作：插入和查询。

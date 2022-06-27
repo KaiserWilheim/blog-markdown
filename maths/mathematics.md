@@ -1,6 +1,5 @@
 ---
 title: 数学杂项整理
-zh-CN: true
 date: 2021-09-21 
 tags:
 - 数学
@@ -13,6 +12,8 @@ mathjax: true
 这里是一个数学杂项（也就是太短暂时写不成博客）的整理。
 
 <!--more-->
+
+<div id="problem-card-vis">false</div>
 
 # 质数
 

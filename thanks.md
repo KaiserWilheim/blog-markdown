@@ -3,6 +3,9 @@ title: 感谢
 date: 3000-01-01
 tags:
 ---
+
+<div id="problem-card-vis">false</div>
+
 感谢 **CloudySky** 和 **宝硕** 的大力支持。
 
 没有他们就没有这个博客。

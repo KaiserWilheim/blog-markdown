@@ -8,15 +8,15 @@ categories:
 	- 题解
 mathjax: true
 ---
-
-Luogu P3645
-LibreOJ #2887
-UOJ #111
-BZOJ #4070
-
-APIO 2015
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">雅加达的摩天楼</div>
+<div id="problem-info-from">APIO 2015</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P3645">Luogu P3645</a></li><li><a href="https://loj.ac/p/2887">LibreOJ L2887</a></li><li><a href="https://uoj.ac/problem/111">UOJ #111</a></li><li><a href="https://darkbzoj.cc/problem/4070">BZOJ #4070</a></li></ul></div>
+
 ----
 
 题目说，只要一栋楼里面的一只doge知道了消息，那么他就可以在不产生任何代价的情况下将这条消息传递给这栋楼里面的所有doge。

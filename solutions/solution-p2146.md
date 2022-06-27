@@ -8,13 +8,15 @@ categories:
  题解
 mathjax: true
 ---
+<br>
+<!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">软件包管理器</div>
+<div id="problem-info-from">NOI 2015</div>
+<div id="problem-info-difficulty">提高+ /省选-</div>
+<div id="problem-info-color">#3498db</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P2146">Luogu P2146</a></li><li><a href="https://loj.ac/p/2130">LibreOJ L2130</a></li><li><a href="https://www.acwing.com/problem/content/920/">AcWing 918</a></li></ul></div>
 
-Luogu P2146
-LibreOJ #2130
-
-2015 NOI
-
-<!--more-->
 ----
 
 树剖模板题。

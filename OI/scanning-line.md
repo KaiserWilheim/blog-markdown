@@ -12,6 +12,8 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 思想
 
 顾名思义，扫描线就是要模拟一根线，扫过整个图形。至于方向什么的自己根据喜好，这里选用从左往右的方式。

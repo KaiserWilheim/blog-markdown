@@ -13,6 +13,8 @@ mathjax: true
 Splay.
 
 <!--more-->
+
+<div id="problem-card-vis">false</div>
 （2022年5月24日重构）
 
 Splay是一种很好地维护一棵二叉搜索树的方法。

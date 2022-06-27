@@ -8,14 +8,15 @@ categories:
 	- 题解
 mathjax: true
 ---
-
-Luogu P1712
-LibreOJ #2086
-BZOJ 4653
-
-NOI 2016
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">区间</div>
+<div id="problem-info-from">NOI 2016</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P1712">Luogu P1712</a></li><li><a href="https://loj.ac/p/2086">LibreOJ L2086</a></li><li><a href="https://www.acwing.com/problem/content/1011/">AcWing 1009</a></li><li><a href="https://darkbzoj.cc/problem/4653">BZOJ #4653</a></li></ul></div>
+
 ----
 
 既然题目没有规定覆盖的顺序，且想让我们最小化选定的区间长度的极差，那我们不妨就先按照区间长度排一个序。

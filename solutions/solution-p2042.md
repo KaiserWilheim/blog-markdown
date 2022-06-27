@@ -8,12 +8,15 @@ categories:
 	题解
 mathjax: true
 ---
-
-Luogu P2042
-
-NOI 2005
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">维护数列</div>
+<div id="problem-info-from">NOI 2005</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P2042">Luogu P2042</a></li><li><a href="https://www.acwing.com/problem/content/957/">AcWing 955</a></li></ul></div>
+
 ----
 
 题目要求我们维护一个数列，支持下面六种操作：
@@ -119,77 +122,6 @@ void pushdown(int x)
 区间推平的优先级是先于区间翻转的，且如果这个区间整体被推平了，那么这个区间翻转了和没翻转没有什么区别，所以每一次标记下传的时候只需要下传两者其一即可。
 
 然后是六种操作：
-
-``` cpp
-int main()
-{
-	for(int i = 1; i < N; i++) recycle[++tt] = i;//循环使用下标，节约空间
-	scanf("%d%d", &n, &m);
-	tr[0].ms = w[0] = w[n + 1] = -INF;//哨兵
-	for(int i = 1; i <= n; i++) scanf("%d", &w[i]);
-	rt = build(0, n + 1, 0);
-	char op[20];
-	while(m--)
-	{
-		scanf("%s", op);
-		if(!strcmp(op, "INSERT"))
-		{
-			int posi, tot;
-			scanf("%d%d", &posi, &tot);
-			for(int i = 0; i < tot; i++) scanf("%d", &w[i]);
-			int l = get_k(posi + 1), r = get_k(posi + 2);
-			splay(l, 0), splay(r, l);
-			int u = build(0, tot - 1, r);
-			tr[r].s[0] = u;
-			pushup(r), pushup(l);
-		}
-		else if(!strcmp(op, "DELETE"))
-		{
-			int posi, tot;
-			scanf("%d%d", &posi, &tot);
-			int l = get_k(posi), r = get_k(posi + tot + 1);
-			splay(l, 0), splay(r, l);
-			del(tr[r].s[0]);
-			tr[r].s[0] = 0;
-			pushup(r), pushup(l);
-		}
-		else if(!strcmp(op, "MAKE-SAME"))
-		{
-			int posi, tot, c;
-			scanf("%d%d%d", &posi, &tot, &c);
-			int l = get_k(posi), r = get_k(posi + tot + 1);
-			splay(l, 0), splay(r, l);
-			auto &son = tr[tr[r].s[0]];
-			son.same = 1, son.v = c, son.sum = c * son.sz;
-			if(c > 0) son.ms = son.ls = son.rs = son.sum;
-			else son.ms = c, son.ls = son.rs = 0;
-			pushup(r), pushup(l);
-		}
-		else if(!strcmp(op, "REVERSE"))
-		{
-			int posi, tot;
-			scanf("%d%d", &posi, &tot);
-			int l = get_k(posi), r = get_k(posi + tot + 1);
-			splay(l, 0), splay(r, l);
-			auto &son = tr[tr[r].s[0]];
-			son.rev ^= 1;
-			swap(son.ls, son.rs);
-			swap(son.s[0], son.s[1]);
-			pushup(r), pushup(l);
-		}
-		else if(!strcmp(op, "GET-SUM"))
-		{
-			int posi, tot;
-			scanf("%d%d", &posi, &tot);
-			int l = get_k(posi), r = get_k(posi + tot + 1);
-			splay(l, 0), splay(r, l);
-			printf("%d\n", tr[tr[r].s[0]].sum);
-		}
-		else printf("%d\n", tr[rt].ms);
-	}
-	return 0;
-}
-```
 
 1. 插入一整段区间的操作与一开始建树的时候差不多。
 	我们需要首先预留出来新区间的位置，比如说 $posi+1$ 节点的左子树。此时这棵树长这个样子：

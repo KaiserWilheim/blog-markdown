@@ -9,10 +9,15 @@ categories:
 	题解
 mathjax: true
 ---
+<br>
+<!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">旅游</div>
+<div id="problem-info-from">国家集训队</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P1505">Luogu P1505</a></li></ul></div>
 
-Luogu P1505
-
-<!--more-->
 ----
 
 题目给定一棵 n 个节点的树，边带权，编号 $0 \sim n-1$，需要我们支持五种操作：

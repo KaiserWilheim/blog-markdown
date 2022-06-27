@@ -9,13 +9,15 @@ categories:
 	题解
 mathjax: true
 ---
-
-Luogu P2414
-LibreOJ #2444
-
-NOI 2011
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">阿狸的打字机</div>
+<div id="problem-info-from">NOI 2011</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P2414">Luogu P2414</a></li><li><a href="https://loj.ac/p/2444">LibreOJ L2444</a></li><li><a href="https://www.acwing.com/problem/content/985/">AcWing 983</a></li></ul></div>
+
 ----
 
 题目这个样子就相当于是构造了一个字符串的集合，同时询问我们某一个字符串在另一个字符串内出现了多少次。
@@ -103,146 +105,8 @@ AC自动机是有字符串匹配的功能的，但是这样直接匹配还是有
 
 ----
 
-然后是代码部分：
+然后是代码：
 
-AC自动机：
-
-``` cpp
-struct AC
-{
-	int s[26];
-	int v, fail, fa;
-}tr[N];
-int cnt;
-void insert()
-{
-	len = strlen(s);
-	for(int i = 0, now = 0; i < len; i++)
-	{
-		if(s[i] >= 'a' && s[i] <= 'z')
-		{
-			if(!tr[now].s[s[i] - 'a'])
-			{
-				tr[now].s[s[i] - 'a'] = ++cnt;
-				tr[cnt].fa = now;
-			}
-			now = tr[now].s[s[i] - 'a'];
-		}
-		if(s[i] == 'P')
-			a[++n] = now;
-		if(s[i] == 'B')
-			now = tr[now].fa;
-	}
-}
-void build_fail()
-{
-	queue<int>q;
-	for(int i = 0; i < 26; i++)
-		if(tr[0].s[i])q.push(tr[0].s[i]);
-	while(!q.empty())
-	{
-		int u = q.front();
-		q.pop();
-		for(int i = 0; i < 26; i++)
-		{
-			if(tr[u].s[i])
-			{
-				tr[tr[u].s[i]].fail = tr[tr[u].fail].s[i];
-				q.push(tr[u].s[i]);
-			}
-			else
-			{
-				tr[u].s[i] = tr[tr[u].fail].s[i];
-			}
-		}
-	}
-}
-```
-
-dfs以及相关信息存储：
-
-``` cpp
-int h[N], e[M], ne[M], idx;
-void add(int a, int b)
-{
-	e[++idx] = b, ne[idx] = h[a], h[a] = idx;
-}
-
-int a[N];
-int dfn[N], out[N], indx;
-
-/* 中间略过一段…… */
-
-void dfs(int u, int p)
-{
-	dfn[u] = ++indx;
-	for(int i = h[u]; ~i; i = ne[i])
-	{
-		int v = e[i];
-		if(v ^ p)dfs(v, u);
-	}
-	out[u] = indx;
-}
-```
-
-（树状数组就不写了）
-
-主函数：
-
-``` cpp
-struct query
-{
-	int x, id;
-};
-vector<query>g[N];
-
-int ans[N];
-int main()
-{
-	memset(h, -1, sizeof(h));
-	scanf("%s", s);
-	insert();
-	build_fail();
-	for(int i = 1; i <= cnt; i++)
-		add(i, tr[i].fail), add(tr[i].fail, i);
-	dfs(0, 0);
-	m = read();
-	for(int i = 1; i <= m; i++)
-	{
-		int x = read(), y = read();
-		g[y].push_back({ x,i });
-	}
-	for(int i = 0, now = 0, j = 0; i < len; i++)
-	{
-		if(s[i] == 'P')
-		{
-			j++;
-			for(int k = 0; k < g[j].size(); k++)
-			{
-				int x = g[j][k].x, id = g[j][k].id;
-				ans[id] = segsum(out[a[x]]) - segsum(dfn[a[x]] - 1);
-			}
-		}
-		if(s[i] == 'B')
-		{
-			segadd(dfn[now], -1);
-			now = tr[now].fa;
-		}
-		if(s[i] >= 'a' && s[i] <= 'z')
-		{
-			now = tr[now].s[s[i] - 'a'];
-			segadd(dfn[now], 1);
-		}
-	}
-	for(int i = 1; i <= m; i++)
-		printf("%d\n", ans[i]);
-	return 0;
-}
-```
-
-最后放一遍全部加起来的：
-
-{% note success 示例代码 %}
 ``` cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -394,4 +258,3 @@ int main()
 	return 0;
 }
 ```
-{% endnote %}

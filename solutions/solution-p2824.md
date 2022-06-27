@@ -9,14 +9,15 @@ categories:
 	- 题解
 mathjax: true
 ---
-
-Luogu P2824
-LibreOJ #2055
-
-HEOI 2016
-TJOI 2016
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">排序</div>
+<div id="problem-info-from">HEOI 2016<br>TJOI 2016</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P2824">Luogu P2824</a></li><li><a href="https://loj.ac/p/2055">LibreOJ L2055</a></li><li><a href="https://www.acwing.com/problem/content/2932/">AcWing 2929</a></li></ul></div>
+
 ----
 
 一看见排序我们就感觉开始复杂起来了，毕竟排序是一个复杂而又缓慢的过程。
@@ -50,7 +51,6 @@ TJOI 2016
 然后就显而易见了。
 
 ``` cpp
-#define _CRT_SECURE_NO_WARNINGS
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 100010;

@@ -1,5 +1,5 @@
 ---
-title: L2980. 「THUSCH 2017」 大魔法师 题解
+title: L2980. [THUSCH 2017] 大魔法师 题解
 date: 2022-04-17
 tags:
 	- 题解
@@ -8,11 +8,15 @@ categories:
 	题解
 mathjax: true
 ---
-
-LibreOJ #2980
-Luogu P7453
-
+<br>
 <!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">大魔法师</div>
+<div id="problem-info-from">THUSCH 2017</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P7453">Luogu P7453</a></li><li><a href="https://loj.ac/p/2980">LibreOJ L2980</a></li></ul></div>
+
 ----
 
 首先看题：

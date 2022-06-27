@@ -8,13 +8,15 @@ categories:
 	题解
 mathjax: true
 ---
+<br>
+<!-- more -->
+<div id="problem-card-vis">true</div>
+<div id="problem-info-name">餐巾计划问题</div>
+<div id="problem-info-from">网络流24题</div>
+<div id="problem-info-difficulty">省选/NOI-</div>
+<div id="problem-info-color">#9d3dcf</div>
+<div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P1251">Luogu P1251</a></li><li><a href="https://loj.ac/p/6008">LibreOJ L6008</a></li><li><a href="https://www.acwing.com/problem/content/2186/">AcWing 2184</a></li></ul></div>
 
-Luogu P1251
-LibreOJ #6008
-
-网络流24题之一。
-
-<!--more-->
 ----
 
 题目要求我们安排餐巾的清洗分配。

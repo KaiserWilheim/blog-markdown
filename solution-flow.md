@@ -13,6 +13,8 @@ mathjax: true
 
 <!-- more -->
 
+<div id="problem-card-vis">false</div>
+
 （我为什么要造孽放代码上来……）
 
 # 目录
@@ -32,7 +34,6 @@ mathjax: true
 
 ## 最大流
 
-- Luogu P2936 [USACO09JAN] Total Flow S [>](/solution-flow/#USACO09JAN-Total-Flow-S)
 - Luogu P1343 地震逃生 [>](/solution-flow/#地震逃生)
 - Luogu P2472 [SCOI2007] 蜥蜴 [>](/solution-flow/#SCOI2007-蜥蜴)
 - Luogu P2891 [USACO07OPEN] Dining G [>](/solution-flow/#USACO07OPEN-Dining-G)
@@ -227,18 +228,9 @@ mathjax: true
 
 # 最大流
 
-## [USACO09JAN] Total Flow S
-
-最大流板子。
-将字符转换成数字进行建图即可。
-
-{% note success %}
-[`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p2000-p2999/p2936/p2936.cpp)
-{% endnote %}
-
 ## 地震逃生
 
-也是最大流板子，只不过在跑之前先要用并查集来判断一下连通性。
+最大流板子，只不过在跑之前先要用并查集来判断一下连通性。
 当然也可以直接跑，判断最大流量是否为0。
 
 {% note success %}
@@ -354,7 +346,7 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 [`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p3000-p3999/p3931/p3931.cpp)
 {% endnote %}
 
-## [USACO5.4] 奶牛的电信Telecowmunication
+## [USACO5.4] 奶牛的电信 Telecowmunication
 
 题目要求我们求出，我们需要删除多少个点才能使题目给出的两个点之间不连通。
 

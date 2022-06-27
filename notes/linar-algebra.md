@@ -13,6 +13,8 @@ mathjax: true
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 排列相关
 
 ## 排列

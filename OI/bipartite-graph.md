@@ -12,6 +12,8 @@ categories:
 
 <!--more-->
 
+<div id="problem-card-vis">false</div>
+
 # 什么是二分图
 
 二分图是一种特殊的图。
