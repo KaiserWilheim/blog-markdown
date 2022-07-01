@@ -29,7 +29,7 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 如果某一个板子是我自己写的，在它的附近会有一个 $\color[rgb]{1,1,0.0625}{φ}$ 的标志。这些板子保证运行的正确性。大胆褐，不会有事的（指运行结果）。
 如果某一个板子不是我写的，在它的附近会有一个 $\blacktriangleright$ 指向它的出处。这些板子不保证运行的正确性。使用之前请斟酌。 
 
-最后一次维护：20220527
+最后一次维护：20220628
 
 # OI
 
@@ -68,6 +68,9 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [差分约束](/OI/difference-constraint/) $\color[rgb]{0,0.5,1}{\sharp}$
   一种用来解决不等式组求解的算法。
 
+- [2-SAT](/OI/2-sat) $\color[rgb]{0,0.5,1}{\sharp}$
+  rt，2-SAT问题。
+
 ## 数据结构
 
 啊这……这里该怎么写……
@@ -105,8 +108,11 @@ $\rm{OI}$ 与 $\rm{Ch}$ 的交汇，能迸发出怎样的火花呢？
 - [网络流](/OI/flow) $\color[rgb]{0.5,0.4,0.4}{φ}$
   如题，网络流相关内容。
 
-- [二分图](/OI/bipartie-graph) 
+- [二分图](/OI/bipartie-graph) $\color[rgb]{0.5,0.4,0.4}{φ}$
   如题，二分图相关内容。
+
+- [虚树](/OI/virtual-tree) $\color[rgb]{0.5,0.4,0.4}{φ}$
+  虚树。
 
 ## 题解
 
@@ -122,7 +128,7 @@ Luogu LibreOJ AcWing UOJ BZOJ
 - [Luogu P1505](/solutions/solution-p1505) [国家集训队] 旅游
 - [Luogu P1712](/solutions/solution-p1712) [NOI2016] 区间
 - [Luogu P2042](/solutions/solution-p2042) [NOI2005] 维护数列
-- [Luogu P2146](/solutions/solution-p2146) 软件包管理器
+- [Luogu P2146](/solutions/solution-p2146) [NOI2015]软件包管理器
 - [Luogu P2414](/solutions/solution-p2414) [NOI2011] 阿狸的打字机
 - [Luogu P2824](/solutions/solution-p2824) [HEOI2016/TJOI2016] 排序
 - [Luogu P2860](/solutions/solution-p2860) [USACO06JAN] Redundant Paths G
@@ -131,8 +137,13 @@ Luogu LibreOJ AcWing UOJ BZOJ
 - [Luogu P3586](/solutions/solution-p3586) [POI2015] Logistyka
 - [Luogu P3644](/solutions/solution-p3644) [APIO2015] 巴邻旁之桥
 - [Luogu P3645](/solutions/solution-p3645) [APIO2015] 雅加达的摩天楼
+- [Luogu P4588](/solutions/solution-p4588) [TJOI2018] 数学计算
 - [Luogu P4643](/solutions/solution-p4643) [国家集训队] 阿狸和桃子的游戏
+- [Luogu P5024](/solutions/solution-p5024) [NOIP2018 提高组] 保卫王国
 - [Luogu P5290](/solutions/solution-p5290) [十二省联考 2019] 春节十二响
+- [Luogu P7619](/solutions/solution-p7619) [COCI2011-2012#2] RASPORED
+- [Luogu P8021](/solutions/solution-p8021) [ONTAK2015] Bajtman i Okrągły Robin
+- [Luogu P8251](/solutions/solution-p8251) [NOI Online 2022 提高组] 丹钓战
 
 + [LibreOJ #2759](/solutions/solution-l2759) 蜜袋鼯（フクロモモンガ）
 + [LibreOJ #2980](/solutions/solution-l2980) 「THUSCH 2017」 大魔法师
@@ -157,17 +168,7 @@ Luogu LibreOJ AcWing UOJ BZOJ
   包含行列式和矩阵的运算。
   同样咕了。
 
-# 化学
-
-## 有机化学相关
-
-- [Lewis结构式](/chemistry/lewis-structure) $\color[rgb]{0,0.5,1}{\sharp}$
-  $Lewis$ 结构式， $Lewis$ 电子理论以及形式电荷。
-  
-- tbc
-  tbc
-  
----
+----
   
 - [展开](https://www.bilibili.com/video/BV12k4y1173i)
   再见。

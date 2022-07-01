@@ -150,7 +150,8 @@ bool canrbu(int p)
 ``` cpp
 bool canrbu(int k)
 {
-	return tr[k].wn && (alpha * tr[k].s <= ( double )max(tr[tr[k].ls].s, tr[tr[k].rs].s) || ( double )tr[k].sd <= alpha * tr[k].s);
+	return tr[k].wn && (alpha * tr[k].s <= ( double )max(tr[tr[k].ls].s, tr[tr[k].rs].s) ||
+		( double )tr[k].sd <= alpha * tr[k].s);
 }//can rebuild
 ```
 
