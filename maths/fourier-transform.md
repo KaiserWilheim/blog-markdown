@@ -515,7 +515,7 @@ f(ω_n^{k+\frac{n}{2}}) &= f_e((ω_n^{k+\frac{n}{2}})^2) + ω_n^{k+\frac{n}{2}} 
 &= f_e (ω_n^{2k+n}) + ω_n^{k+\frac{n}{2}} f_o(ω_n^{2k+n}) \\\\
 &= f_e (ω_n^{2k}) + ω_n^{k+\frac{n}{2}} f_o(ω_n^{2k}) \\\\
 &= f_e (ω_{\frac{n}{2}}^k) + ω_n^{k+\frac{n}{2}} f_o(ω_{\frac{n}{2}}^k) \\\\
-&= f_e (ω_{\frac{n}{2}}^k) - ω^k_n f_o(ω_{\frac{n}{2}}^k) \\\\
+&= f_e (ω_{\frac{n}{2}}^k) - ω^k_n f_o(ω_{\frac{n}{2}}^k)
 \end{align}
 $$
 

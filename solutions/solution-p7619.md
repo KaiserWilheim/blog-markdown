@@ -245,7 +245,7 @@ int main()
 		t[a] = c;
 		printf("%lld\n", suml - sumt);
 	}
-    return 0;
+	return 0;
 }
 ```
 

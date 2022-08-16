@@ -1,5 +1,5 @@
 ---
-title: L2980. [THUSCH 2017] 大魔法师 题解
+title: L2980 [THUSCH 2017] 大魔法师 题解
 date: 2022-04-17
 tags:
 	- 题解

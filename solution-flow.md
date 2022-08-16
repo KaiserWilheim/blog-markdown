@@ -1,6 +1,6 @@
 ---
 title: 网络流 做题记录
-date: 2022-04-21
+date: 2022-08-14
 tags:
 	- 题解
 	- 网络流
@@ -22,6 +22,7 @@ mathjax: true
 ## 网络流24题
 
 - LibreOJ #6000 / Luogu P2756 飞行员配对方案问题 [>](/solution-flow/#飞行员配对方案问题)
+- LibreOJ #6001 / Luogu P2762 太空飞行计划问题 [>](/solution-flow/#太空飞行计划问题)
 - LibreOJ #6004 / Luogu P3254 圆桌问题 [>](/solution-flow/#圆桌问题)
 - LibreOJ #6007 / Luogu P2774 方格取数问题 [>](/solution-flow/#方格取数问题)
 - LibreOJ #6008 / Luogu P1251 餐巾计划问题 [>](/solution-flow/#餐巾计划问题)
@@ -51,6 +52,8 @@ mathjax: true
 - Luogu P3931 SAC E#1 - 一道难题 Tree [>](/solution-flow/#SAC-E-1-一道难题-Tree)
 - Luogu P1345 [USACO5.4] 奶牛的电信Telecowmunication [>](/solution-flow/#USACO5-4-奶牛的电信Telecowmunication)
 - Luogu P2057 [SHOI2007] 善意的投票 / [JLOI2010] 冠军调查 [>](/solution-flow/#SHOI2007-善意的投票-x2F-JLOI2010-冠军调查)
+- Luogu P4177 [CEOI2008] order [>](/solution-flow/#CEOI2008-order)
+- Luogu P1361 小M的作物 [>](/solution-flow/#小M的作物)
 
 ## 费用流
 
@@ -60,6 +63,9 @@ mathjax: true
 - Luogu P2517 [HAOI2010] 订货 [>](/solution-flow/#HAOI2010-订货)
 - Luogu P2153 [SDOI2009] 晨跑 [>](/solution-flow/#SDOI2009-晨跑)
 
+## 上下界网络流
+
+- Luogu P5258 [JSOI2013] 旅行时的困惑 [>](/solution-flow/#JSOI2013-旅行时的困惑)
 
 # 网络流24题
 
@@ -73,6 +79,17 @@ mathjax: true
 {% note success %}
 [`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p2000-p2999/p2756/p2756.cpp)
 [`Libre OJ`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Libre%20OJ/6000/l6000.cpp)
+{% endnote %}
+
+## 太空飞行计划问题
+
+这是一个最大权闭合子图问题。我们可以将这个转化为一个最小割问题。
+讲解可以见我博客的[另外一篇文章](/OI/flow/#最大权闭合子图问题)。
+
+其中，实验就是正权点，仪器就是负权点，建图连边即可。
+
+{% note success %}
+[`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p2000-p2999/p2762/p2762.cpp)
 {% endnote %}
 
 ## 圆桌问题
@@ -390,6 +407,24 @@ P1402、P2891和P1231实质上是一类问题，都是三种物品进行匹配�
 [`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p2000-p2999/p2057/p2057.cpp)
 {% endnote %}
 
+## [CEOI2008] order
+
+如果不考虑租的情况的话就是最大权闭合子图问题了。
+
+因为工作和租用的机器是一一对应的，所以我们也可以用一条边来代表这个关系，而这种边也得可以是被割掉的才可以。
+那么我们可以把工作和对应的机器连起来，边权是租用的费用。
+这种边割断了之后也可以使源点和汇点不连通，割掉了代表我们对于这个工作是租用机器的。
+其余的还是正常的最大权闭合子图问题，只不过原图中的边已经建好了，我们就不需要再建了。
+
+{% note success %}
+[`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p4000-p4999/p4177/p4177.cpp)
+{% endnote %}
+
+## 小M的作物
+
+如果我们不考虑组合之间的关系，只考虑每一个作物种在哪里，我们可以把每一个作物抽象成点，然后从源点连向该点，容量为 $a_i$，该点连向汇点，容量为 $b_i$。
+以这张图跑最小割的话，我们可以知道
+
 # 费用流
 
 ## [NOIP2000 提高组] 方格取数
@@ -455,6 +490,23 @@ $(0,0)$ 连向源点，$(n,m)$ 连向汇点。
 
 {% note success %}
 [`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p2000-p2999/p2153/p2153.cpp)
+{% endnote %}
+
+# 上下界网络流
+
+## [JSOI2013] 旅行时的困惑
+
+如果我们想让任意两个岛屿都可以互相到达，那么我们需要在原有的树的基础上面建立一棵有双向边的树。
+
+这样我们就可以建立一个上下界网络流的模型。
+建立原树边的反向边，容量范围为 $[1,\infty]$。
+
+因为一条交通线路从任意一个点开始或结束都可以，所以每一个点都从源点连边，向汇点连边，容量均为 $\infty$。
+
+然后就跑有源汇有上下界最小流即可。
+
+{% note success %}
+[`Luogu`](https://gitee.com/kaiserwilheim/OIcodes/blob/master/Luogu/p5000-p5999/p5258/p5258.cpp)
 {% endnote %}
 
 <!-- {% note success %}
