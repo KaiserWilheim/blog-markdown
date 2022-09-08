@@ -14,7 +14,7 @@ mathjax: true
 <div id="problem-card-vis">true</div>
 <div id="problem-info-name">Mousetrap</div>
 <div id="problem-info-from">CEOI 2017</div>
-<div id="problem-info-difficulty">NOI/NOI+ /CTSC</div>
+<div id="problem-info-difficulty">NOI / NOI+ / CTSC</div>
 <div id="problem-info-color">#0e1d69</div>
 <div id="problem-info-submit"><ul><li><a href="https://www.luogu.com.cn/problem/P4654">Luogu P4654</a></li><li><a href="https://loj.ac/p/2482">LibreOJ L2482</a></li></ul></div>
 

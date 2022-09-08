@@ -1,5 +1,5 @@
 ---
-title: L2980 [THUSCH 2017] 大魔法师 题解
+title: "LibreOJ #2980 [THUSCH 2017] 大魔法师 题解"
 date: 2022-04-17
 tags:
 	- 题解
@@ -35,8 +35,8 @@ mathjax: true
 
 我们可以尝试一下转化一下我们的操作。
 
-众所周知，一个矩阵乘以一个单位矩阵 $I$ 还等于它本身。
-单位矩阵的形状是这样的：$\begin{bmatrix}1 & & &\\\\ & 1 & & \\\\ & & \ddots & \\\\ & & & 1 \end{bmatrix}$
+我们可以发现，我们所有的操作不会出现跨位置的操作，也不会出现高于一次的操作（例如 $C_i = C_i \times B_i$ 什么的）
+这样我们就可以使用矩阵来维护这三种信息。
 
 如果我们将 $A_i,B_i,C_i$ 三个数值化作一个矩阵的话，那么这个矩阵 $\begin{bmatrix} A_i & B_i & C_i \end{bmatrix}$ 所对应的单位矩阵是这个样子的：$\begin{bmatrix}1&&\\\\&1&\\\\&&1\end{bmatrix}$。
 
@@ -44,7 +44,7 @@ mathjax: true
 
 同理，第二个操作乘以的是一个 $\begin{bmatrix}1&&\\\\&1&\\\\&1&1\end{bmatrix}$，第三个操作乘以的是一个 $\begin{bmatrix}1&&1\\\\&1&\\\\&&1\end{bmatrix}$。
 
-然后就是可恶的第四个操作。我们需要给 $A_i$ 加上一个 $k$，但是我们无法从刚才的房费里面推出来一个类似的方法。
+然后就是可恶的第四个操作。我们需要给 $A_i$ 加上一个 $k$，但是我们无法从刚才的方法里面推出来一个类似的方法。
 
 于是我们可以考虑将我们维护的矩阵由 $\begin{bmatrix} A_i & B_i & C_i \end{bmatrix}$ 变为 $\begin{bmatrix} A_i & B_i & C_i & 1 \end{bmatrix}$。
 这样我们就只需要乘以一个 $\begin{bmatrix}1&&&\\\\&1&&\\\\&&1&\\\\k&&&1\end{bmatrix}$ 即可。

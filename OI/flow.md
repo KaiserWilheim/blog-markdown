@@ -1,7 +1,6 @@
 ---
 title: 网络流
-zh-CN: true
-date: 2022-06-23
+date: 2022-08-17
 tags:
 	- 算法
 	- 图论
@@ -150,14 +149,14 @@ bool bfs()
 		int t = q[hh++];
 		for(int i = h[t]; ~i; i = ne[i])
 		{
-			int ver = e[i];
-			if(!st[ver] && f[i])
+			int v = e[i];
+			if(!st[v] && f[i])
 			{
-				st[ver] = true;
-				d[ver] = min(d[t], f[i]);
-				pre[ver] = i;
-				if(ver == T) return true;
-				q[++tt] = ver;
+				st[v] = true;
+				d[v] = min(d[t], f[i]);
+				pre[v] = i;
+				if(v == T) return true;
+				q[++tt] = v;
 			}
 		}
 	}
@@ -384,13 +383,11 @@ int n, m, S, T;
 int h[N], e[M], f[M], w[M], ne[M], idx;
 int q[N], d[N], pre[N], incf[N];
 bool st[N];
-
 void add(int a, int b, int c, int d)
 {
 	e[idx] = b, f[idx] = c, w[idx] = d, ne[idx] = h[a], h[a] = idx++;
 	e[idx] = a, f[idx] = 0, w[idx] = -d, ne[idx] = h[b], h[b] = idx++;
 }
-
 bool spfa()
 {
 	int hh = 0, tt = 1;
@@ -405,17 +402,17 @@ bool spfa()
 
 		for(int i = h[t]; ~i; i = ne[i])
 		{
-			int ver = e[i];
-			if(f[i] && d[ver] > d[t] + w[i])
+			int v = e[i];
+			if(f[i] && d[v] > d[t] + w[i])
 			{
-				d[ver] = d[t] + w[i];
-				pre[ver] = i;
-				incf[ver] = min(f[i], incf[t]);
-				if(!st[ver])
+				d[v] = d[t] + w[i];
+				pre[v] = i;
+				incf[v] = min(f[i], incf[t]);
+				if(!st[v])
 				{
-					q[tt++] = ver;
+					q[tt++] = v;
 					if(tt == N) tt = 0;
-					st[ver] = true;
+					st[v] = true;
 				}
 			}
 		}
@@ -423,7 +420,6 @@ bool spfa()
 
 	return incf[T] > 0;
 }
-
 void EK(int &flow, int &cost)
 {
 	flow = cost = 0;
@@ -438,7 +434,6 @@ void EK(int &flow, int &cost)
 		}
 	}
 }
-
 int main()
 {
 	scanf("%d%d%d%d", &n, &m, &S, &T);
@@ -464,79 +459,70 @@ int main()
 using namespace std;
 const int N = 5010, M = 200010, INF = 1e16;
 int n, m, S, T;
-int h[N], e[M], f[M], w[M], ne[M], idx;
-int q[N], d[N], cur[N], pre[N], incf[N];
-bool st[N];
-
+int S, T;
+int h[N], e[M], ne[M], f[M], w[M], idx;
+int cur[N], d[N];
 void add(int a, int b, int c, int d)
 {
 	e[idx] = b, f[idx] = c, w[idx] = d, ne[idx] = h[a], h[a] = idx++;
 	e[idx] = a, f[idx] = 0, w[idx] = -d, ne[idx] = h[b], h[b] = idx++;
 }
-
+int vis[N];
 bool spfa()
 {
-	int hh = 0, tt = 1;
+	queue<int> q;
 	memset(d, 0x3f, sizeof(d));
-	memset(incf, 0, sizeof(incf));
-	memcpy(cur, h, sizeof(h));
-	q[0] = S, d[S] = 0, incf[S] = INF;
-	while(hh != tt)
+	memset(vis, 0, sizeof(vis));
+	d[S] = 0;
+	q.push(S);
+	while(!q.empty())
 	{
-		int t = q[hh++];
-		if(hh == N)hh = 0;
-		st[t] = false;
-		for(int i = h[t]; ~i; i = ne[i])
+		int u = q.front();
+		q.pop();
+		vis[u] = 0;
+		for(int i = h[u]; ~i; i = ne[i])
 		{
-			int ver = e[i];
-			if((f[i]) && (d[ver] > d[t] + w[i]))
+			int v = e[i];
+			if(f[i] && d[v] > d[u] + w[i])
 			{
-				d[ver] = d[t] + w[i];
-				pre[ver] = i;
-				incf[ver] = min(f[i], incf[t]);
-				if(!st[ver])
-				{
-					q[tt++] = ver;
-					if(tt == N)tt = 0;
-					st[ver] = true;
-				}
+				d[v] = d[u] + w[i];
+				if(!vis[v])
+					vis[v] = 1, q.push(v);
 			}
 		}
 	}
-	return incf[T] > 0;
+	return d[T] != 0x3f3f3f3f3f3f3f3f;
 }
-
-int dfs(int u, int lim)
+int find(int u, int limit)
 {
-	if(u == T)return lim;
+	if(u == T)return limit;
 	int flow = 0;
-	for(int i = cur[u]; ~i && flow < lim; i = ne[i])
+	vis[u] = 1;
+	for(int i = cur[u]; ~i && flow < limit; i = ne[i])
 	{
 		cur[u] = i;
-		int ver = e[i];
-		if((d[ver] == d[u] + 1) && (f[i]))
+		int v = e[i];
+		if(d[v] == d[u] + w[i] && f[i] && !vis[v])
 		{
-			int t = dfs(ver, min(f[i], lim - flow));
-			if(!t)d[ver] = -1;
-			f[i] -= t, f[i ^ 1] += t, flow += t;
+			int t = find(v, min(f[i], limit - flow));
+			if(!t)d[v] = -1;
+			f[i] -= t, f[i ^ 1] += t;
+			flow += t;
 		}
 	}
 	return flow;
 }
 void dinic(int &flow, int &cost)
 {
-	flow = cost = 0;
-	int r = 0;
+	flow = 0, cost = 0;
 	while(spfa())
 	{
-		while(r = dfs(S, INF))
-		{
-			flow = r;
-			cost += r * d[T];
-		}
+		memcpy(cur, h, sizeof(h));
+		int k = find(S, INF);
+		flow += k;
+		cost += k * d[T];
 	}
 }
-
 int main()
 {
 	scanf("%d%d%d%d", &n, &m, &S, &T);

@@ -1,5 +1,5 @@
 ---
-title: L3277 [JOISC 2020 Day3] 星座 3 题解
+title: "LibreOJ #3277 [JOISC 2020 Day3] 星座 3 题解"
 date: 2022-07-05
 tags:
 	- 题解
