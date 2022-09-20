@@ -142,7 +142,9 @@ Luogu (CF AT) LibreOJ AcWing UOJ BZOJ
 - [Luogu P2824](/solutions/solution-p2824) [HEOI2016/TJOI2016] 排序
 - [Luogu P2860](/solutions/solution-p2860) [USACO06JAN] Redundant Paths G
 - [Luogu P2906](/solutions/solution-p2906) [USACO08OPEN] Cow Neighborhoods G
+- [Luogu P3047](/solutions/solution-p3047) [USACO12FEB] Nearby Cows G
 - [Luogu P3050](/solutions/solution-p3050) [USACO12MAR] Large Banner
+- [Luogu P3174](/solutions/solution-p3174) [HAOI2009] 毛毛虫
 - [Luogu P3188](/solutions/solution-p3188) [HNOI2007] 梦幻岛宝珠
 - [Luogu P3243](/solutions/solution-p3243) [HNOI2015] 菜肴制作
 - [Luogu P3462](/solutions/solution-p3462) [POI2007] 砝码 ODW
