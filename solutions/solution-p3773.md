@@ -3,7 +3,7 @@ title: P3773 [CTSC2017] 吉夫特 题解
 date: 2022-08-22
 tags:
 	- 题解
-	- 数学
+	- 数学（题目）
 categories:
 	- 题解
 mathjax: true

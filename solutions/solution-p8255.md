@@ -3,7 +3,7 @@ title: P8255 [NOI Online 2022 入门组] 数学游戏 题解
 date: 2022-07-01
 tags:
 	- 题解
-	- 数学
+	- 数学（题目）
 categories:
 	- 题解
 mathjax: true

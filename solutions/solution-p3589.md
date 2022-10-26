@@ -3,7 +3,7 @@ title: P3589 [POI2015] Kurs szybkiego czytania 题解
 date: 2022-08-17
 tags:
 	- 题解
-	- 数学
+	- 数学（题目）
 categories:
 	- 题解
 mathjax: true

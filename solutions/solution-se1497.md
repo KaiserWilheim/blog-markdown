@@ -3,6 +3,8 @@ title: "S2OJ #1497. 树 题解"
 date: 2022-08-26
 tags:
 	- 题解
+	- STL
+	- S2OJ
 categories:
 	- 题解
 mathjax: true
@@ -97,3 +99,6 @@ int main()
 }
 ```
 
+<script>
+	getProblemCardInfo();
+</script>

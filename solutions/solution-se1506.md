@@ -3,6 +3,8 @@ title: "S2OJ #1506. Antifloyd 题解"
 date: 2022-08-26
 tags:
 	- 题解
+	- 图论
+	- S2OJ
 categories:
 	- 题解
 mathjax: true
@@ -144,3 +146,6 @@ int main()
 }
 ```
 
+<script>
+	getProblemCardInfo();
+</script>

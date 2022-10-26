@@ -5,6 +5,7 @@ tags:
 	- 题解
 	- 贪心
 	- BFS
+	- S2OJ
 categories:
 	- 题解
 mathjax: true
@@ -127,3 +128,6 @@ int main()
 }
 ```
 
+<script>
+	getProblemCardInfo();
+</script>

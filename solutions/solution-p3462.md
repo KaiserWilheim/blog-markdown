@@ -10,7 +10,7 @@ mathjax: true
 <br>
 <!-- more -->
 <div id="problem-card-vis">true</div>
-<div id="problem-info-name">砝码ODW</div>
+<div id="problem-info-name">砝码 ODW</div>
 <div id="problem-info-from">POI 2007</div>
 <div id="problem-info-difficulty">省选/NOI-</div>
 <div id="problem-info-color">#9d3dcf</div>

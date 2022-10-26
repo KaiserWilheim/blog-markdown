@@ -5,7 +5,7 @@ tags:
 	- 题解
 	- 矩阵树定理
 	- 容斥
-	- 数学
+	- 数学（题目）
 categories:
 	- 题解
 mathjax: true

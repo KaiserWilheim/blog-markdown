@@ -183,9 +183,11 @@ Luogu (CF AT) LibreOJ AcWing UOJ BZOJ
 
 - [S2OJ #636](/solutions/solution-se636) 购物
 - [S2OJ #993](/solutions/solution-se993) Merge
+- [S2OJ #1449](/solutions/solution-se1449) 保KDA
 - [S2OJ #1497](/solutions/solution-se1497) 树
 - [S2OJ #1498](/solutions/solution-se1498) 换乘
 - [S2OJ #1506](/solutions/solution-se1506) Antifloyd
+- [S2OJ #1590](/solutions/solution-se1590) 网络
 
 ## 比赛记录
 

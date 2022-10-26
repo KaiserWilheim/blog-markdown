@@ -3,7 +3,7 @@ title: P3050 [USACO12MAR] Large Banner 题解
 date: 2022-08-16
 tags:
 	- 题解
-	- 数学
+	- 数学（题目）
 	- 莫比乌斯反演
 categories:
 	- 题解

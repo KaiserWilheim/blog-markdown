@@ -3,6 +3,8 @@ title: "S2OJ #1498. 换乘 题解"
 date: 2022-08-26
 tags:
 	- 题解
+	- 最短路
+	- S2OJ
 categories:
 	- 题解
 mathjax: true
@@ -45,7 +47,6 @@ mathjax: true
 
 ``` cpp
 #include <bits/stdc++.h>
-#include <unordered_map>
 using namespace std;
 const int N = 1000010, M = 4000010;
 int n, m;
@@ -125,3 +126,6 @@ int main()
 }
 ```
 
+<script>
+	getProblemCardInfo();
+</script>

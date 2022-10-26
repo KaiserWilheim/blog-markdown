@@ -3,7 +3,7 @@ title: P1999 高维正方体 题解
 date: 2022-08-21
 tags:
 	- 题解
-	- 数学
+	- 数学（题目）
 categories:
 	- 题解
 mathjax: true
